@@ -99,67 +99,50 @@
         button { background: #fff; color: #000; padding: 20px 40px; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; width: 100%; transition: 0.3s; letter-spacing: 1px; }
         button:hover { background: var(--quant-cyan); box-shadow: 0 0 30px var(--quant-cyan); transform: scale(1.02); }
 
-        /* Blockquote */
-        blockquote { font-size: 1.8rem; font-weight: 600; font-style: italic; border-left: 4px solid var(--quant-cyan); padding-left: 20px; margin: 40px 0; color: #fff; }
+       <section id="philosophy">
+    <div class="container">
+        <div class="bento-item col-12 gs-reveal" style="text-align: center; border-color: var(--hpu-purple);">
+            <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 20px;">
+                NOT A GATEKEEPER.<br><span class="purple-gradient">A PROVIDER.</span>
+            </h2>
 
-    </style>
-</head>
-<body>
+            <p class="lead" style="margin: 0 auto;">
+                Life isn’t measured in line items. It is measured in the moments we create and how easy we make it for people to actually enjoy them.
 
-    <div id="canvas-container"></div>
+                I’m not here to gatekeep budgets. I’m here to turn ideas into experiences, remove friction, and make campus life smoother, better, and more memorable. College is expensive, and we only get four years. There should be zero unnecessary barriers to making the most of it.
 
-    <main>
-        <section id="hero">
-            <div class="container hero-grid">
-                <div class="gs-reveal" style="z-index: 2;">
-                    <div><span class="typewriter" id="type-text"></span><span class="cursor"></span></div>
-                    <h1 class="text-3d" style="margin-bottom: 20px;">I DON'T WANT TO RUN.<br>I WANT <span class="gradient-text">US TO WIN.</span></h1>
-                        <p class="lead">
-                          You might have friends running, and I respect that. But this decision isn’t about popularity. It’s about who will actually show up when your club needs funding.
-</p>
+                My favorite part of this role is seeing clubs actually spend, build, and create incredible events across campus. I want every club to understand the process, feel confident going into meetings, and walk away funded, not frustrated.
 
-<p class="lead">
-  I’m Blake Bird. Every Monday, I leave class early to be at Finance Board helping clubs get approved. I want clubs spending real money and doing amazing things, not getting blindsided or denied because they didn’t understand the process. I want to reach out before meetings, help them prepare, and be there for them, because this is genuinely my favorite part of the role. And if someone needs me, I go. Whether it is a call about an event change, a suggestion, a meeting, picking something up, or stepping in when another team member is busy or something comes up, I am there. No hesitation. No excuses.
-</p>
+                I will work alongside every presidential candidate to ensure their vision doesn’t stay an idea, but becomes a funded reality.
 
-<p class="lead">
-  Because this role isn’t a title to me, it is a responsibility.
-</p>
+                Outside of this, I’ve already secured a quantitative trading internship, so I’m not here for a resume line. This is where I choose to invest my time because I genuinely care about making this campus better.
+            </p>
 
-<p class="lead">
-  At High Point, I trust we choose leaders based on who delivers, not who they know. Because we all want the same thing: better events, real change, and unforgettable memories. And that only happens with a team that is locked in, not divided.
-</p>
-
-<p class="lead">
-  So no matter who wins president or any position, I will support them fully and make sure we execute at the highest level.
-</p>
-
-<p class="lead">
-  If you want someone who will give everything, every time, vote Blake Bird for Treasurer.
-</p>
-                    <button onclick="document.getElementById('guarantee').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
-                </div>
+            <!-- 🔥 Premium Document Showcase -->
+            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 40px; flex-wrap: wrap;">
                 
-                <div class="tilt-wrapper gs-reveal">
-                    <div class="tilt-card" id="profile"></div>
+                <div onclick="window.open('resume.pdf')" 
+                     style="position: relative; width: 260px; padding: 25px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+                    <div style="position: absolute; inset: 0; border-radius: 16px; background: radial-gradient(circle at 50% 0%, rgba(0,255,255,0.15), transparent 70%); opacity: 0; transition: 0.3s;"></div>
+                    <h3 style="margin-bottom: 10px;">Research Resume</h3>
+                    <p style="opacity: 0.7;">Quantitative models, physics-based research, and technical depth</p>
                 </div>
-            </div>
-        </section>
 
-        <section id="philosophy">
-            <div class="container">
-                <div class="bento-item col-12 gs-reveal" style="text-align: center; border-color: var(--hpu-purple);">
-                    <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 20px;">NOT A GATEKEEPER.<br><span class="purple-gradient">A PROVIDER.</span></h2>
-                    <p class="lead" style="margin: 0 auto;">
-                        Life isn't measured in line items; it is about creating memories. I am not running to pad my resume[cite: 64, 99]. My absolute favorite thing to do is approve funds, watch clubs spend money, and see incredible campus events happen. I will work alongside every presidential candidate to ensure their vision becomes a funded reality.
-                    </p>
-                    <blockquote style="text-align: left; max-width: 800px; margin: 40px auto 0;">
-                        "Treat effort as a privilege and failure as signal." [cite: 50, 98]
-                    </blockquote>
+                <div onclick="window.open('essay.pdf')" 
+                     style="position: relative; width: 260px; padding: 25px; border-radius: 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(10px);">
+                    <div style="position: absolute; inset: 0; border-radius: 16px; background: radial-gradient(circle at 50% 0%, rgba(128,0,255,0.2), transparent 70%); opacity: 0; transition: 0.3s;"></div>
+                    <h3 style="margin-bottom: 10px;">Personal Essay</h3>
+                    <p style="opacity: 0.7;">Motivation, vision, and long-term ambition</p>
                 </div>
-            </div>
-        </section>
 
+            </div>
+
+            <blockquote style="text-align: left; max-width: 800px; margin: 40px auto 0;">
+                "Treat effort as a privilege and failure as signal."
+            </blockquote>
+        </div>
+    </div>
+</section>
         <section id="proof">
             <div class="container">
                 <h2 style="font-size: 3rem; margin-bottom: 2rem;" class="gs-reveal">The <span class="gradient-text">Engine</span> Behind the Vision.</h2>
