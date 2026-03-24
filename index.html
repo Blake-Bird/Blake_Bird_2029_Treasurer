@@ -21,9 +21,11 @@
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #ffffff;
             --text-muted: #86868b;
+            --card-radius: 30px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; }
+        html { scroll-behavior: smooth; }
         body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; line-height: 1.6; }
         
         /* Smooth Scrollbar */
@@ -34,7 +36,8 @@
         /* =========================================
            WEBGL 3D BACKGROUND
            ========================================= */
-        #canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.8; }
+        #canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.8; transition: opacity 0.4s ease; }
+        body.audio-active #canvas-container { opacity: 1; }
         main { position: relative; z-index: 10; }
         .container { max-width: 1400px; margin: 0 auto; padding: 0 5vw; }
         section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 12vh 0; position: relative; }
@@ -49,6 +52,15 @@
         .gradient-text { background: linear-gradient(135deg, #fff, var(--quant-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .purple-gradient { background: linear-gradient(135deg, #fff, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         p.lead { font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--text-muted); max-width: 800px; margin-bottom: 2rem; font-weight: 400; }
+        .section-kicker {
+            display: inline-flex; align-items: center; gap: 10px; color: var(--quant-cyan); font-weight: 800;
+            text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 18px;
+        }
+        .section-kicker::before {
+            content: "";
+            width: 34px; height: 1px; background: rgba(0,229,255,0.8);
+            box-shadow: 0 0 12px rgba(0,229,255,0.8);
+        }
 
         /* Typewriter */
         .typewriter { font-size: 1.5rem; font-weight: 700; color: var(--quant-cyan); margin-bottom: 1rem; display: inline-block; letter-spacing: 2px; text-transform: uppercase; }
@@ -58,20 +70,35 @@
         /* =========================================
            ROTATING PROFILE CARD (HERO)
            ========================================= */
-        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
-        @media (max-width: 968px) { .hero-grid { grid-template-columns: 1fr; } }
+        .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 56px; align-items: start; }
+        @media (max-width: 968px) { .hero-grid { grid-template-columns: 1fr; gap: 28px; } }
         
-        .tilt-wrapper { perspective: 1000px; width: 100%; max-width: 450px; margin: 0 auto; }
+        .tilt-wrapper { perspective: 1000px; width: 100%; max-width: 450px; margin: 0 auto; position: sticky; top: 14vh; }
         .tilt-card {
             width: 100%; aspect-ratio: 3/4; border-radius: 30px; border: 1px solid var(--glass-border);
             background: url('your-image.jpg') center/cover; /* REPLACE THIS IMAGE */
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.2);
-            transform-style: preserve-3d; transition: transform 0.1s; position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.2), 0 0 80px rgba(0,229,255,0.12);
+            transform-style: preserve-3d; transition: transform 0.1s, box-shadow 0.3s ease; position: relative;
+        }
+        .tilt-card::before {
+            content: "";
+            position: absolute; inset: -18px;
+            background: radial-gradient(circle at 50% 50%, rgba(0,229,255,0.16), transparent 62%);
+            filter: blur(22px);
+            z-index: -1;
         }
         .tilt-card::after {
             content: "BLAKE BIRD"; position: absolute; bottom: -20px; right: -20px;
             font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2);
             transform: translateZ(60px); pointer-events: none; white-space: nowrap;
+        }
+        .profile-badges {
+            display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 22px;
+        }
+        .profile-badge {
+            padding: 10px 14px; border-radius: 999px; font-size: 0.9rem; font-weight: 700;
+            color: #fff; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(14px);
         }
 
         /* =========================================
@@ -80,20 +107,282 @@
         .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-top: 40px; }
         .bento-item { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 40px; position: relative; overflow: hidden; transition: 0.4s ease; }
         .bento-item:hover { border-color: var(--quant-cyan); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 229, 255, 0.1); }
-        .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
-        @media (max-width: 968px) { .col-8, .col-4 { grid-column: span 12; } }
+        .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; } .col-6 { grid-column: span 6; } .col-3 { grid-column: span 3; }
+        @media (max-width: 968px) { .col-8, .col-4, .col-6, .col-3 { grid-column: span 12; } }
         
         .stat { font-size: 4.5rem; font-weight: 900; color: var(--quant-cyan); line-height: 1; margin-bottom: 10px; }
-        
-        /* =========================================
-           PULSING GUARANTEE FORM
-           ========================================= */
+
+        /* Hero copy layout */
+        .hero-copy-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 16px;
+            max-width: 920px;
+            margin: 18px 0 24px;
+        }
+        .hero-copy-card {
+            grid-column: span 6;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 22px 24px;
+            backdrop-filter: blur(14px);
+            transition: 0.35s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-copy-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,229,255,0.05), transparent 40%, rgba(58,0,120,0.06));
+            opacity: 0;
+            transition: opacity 0.35s ease;
+        }
+        .hero-copy-card:hover::before { opacity: 1; }
+        .hero-copy-card:hover {
+            border-color: rgba(0,229,255,0.25);
+            box-shadow: 0 18px 40px rgba(0,229,255,0.08);
+            transform: translateY(-4px);
+        }
+        .hero-copy-card.wide { grid-column: span 12; }
+        .hero-copy-card p.lead { margin: 0; max-width: none; font-size: clamp(1rem, 1.8vw, 1.35rem); }
+        .hero-actions {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .ghost-btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            min-width: 220px; padding: 18px 26px;
+            border-radius: 999px; border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(255,255,255,0.03); color: #fff;
+            font-size: 1rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer; transition: 0.3s ease; text-decoration: none;
+        }
+        .ghost-btn:hover {
+            border-color: rgba(0,229,255,0.35);
+            background: rgba(0,229,255,0.08);
+            box-shadow: 0 0 30px rgba(0,229,255,0.12);
+            transform: translateY(-2px);
+        }
+        .mini-chip-row {
+            display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 0;
+        }
+        .mini-chip {
+            padding: 9px 14px; border-radius: 999px;
+            font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 800;
+            color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        /* Pipeline */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-top: 32px;
+        }
+        .pipeline-step {
+            position: relative;
+            padding: 28px 24px;
+            border-radius: 26px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(16px);
+            min-height: 250px;
+            overflow: hidden;
+        }
+        .pipeline-step::after {
+            content: "";
+            position: absolute;
+            inset: auto -20% -45% auto;
+            width: 180px; height: 180px; border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,229,255,0.12), transparent 70%);
+            filter: blur(10px);
+        }
+        .pipeline-number {
+            font-size: 0.9rem; color: var(--quant-cyan); font-weight: 800; letter-spacing: 2px; margin-bottom: 12px;
+        }
+        .pipeline-step h3 { font-size: 1.5rem; margin-bottom: 10px; line-height: 1.1; }
+        .pipeline-step p { color: var(--text-muted); font-size: 1rem; }
+        @media (max-width: 1100px) { .pipeline-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .pipeline-grid { grid-template-columns: 1fr; } }
+
+        /* Document modal / cards */
+        .doc-preview-btn {
+            text-decoration: none; color: #fff; width: 320px; min-height: 190px; padding: 26px; border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.08); backdrop-filter: blur(18px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.25); transition: 0.35s ease;
+            transform-style: preserve-3d; display: flex; flex-direction: column; justify-content: space-between; text-align: left;
+            cursor: pointer;
+        }
+        .doc-preview-btn:hover {
+            transform: translateY(-8px) scale(1.02) rotateX(3deg);
+            box-shadow: 0 24px 60px rgba(0,229,255,0.18);
+        }
+        .doc-modal {
+            position: fixed; inset: 0; background: rgba(3,3,5,0.85); backdrop-filter: blur(20px);
+            z-index: 2000; display: none; align-items: center; justify-content: center; padding: 30px;
+        }
+        .doc-modal.active { display: flex; }
+        .doc-shell {
+            width: min(1200px, 96vw); height: min(84vh, 900px);
+            background: rgba(10,10,14,0.95); border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 28px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+            display: grid; grid-template-rows: auto 1fr;
+        }
+        .doc-topbar {
+            display: flex; justify-content: space-between; align-items: center; gap: 20px;
+            padding: 18px 22px; border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: linear-gradient(135deg, rgba(0,229,255,0.08), rgba(58,0,120,0.08));
+        }
+        .doc-title-wrap h3 { font-size: 1.2rem; margin-bottom: 4px; }
+        .doc-title-wrap p { color: var(--text-muted); font-size: 0.95rem; }
+        .doc-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .doc-actions a, .doc-actions button {
+            background: rgba(255,255,255,0.06); color: #fff; border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 16px; border-radius: 999px; font-size: 0.9rem; font-weight: 800; cursor: pointer;
+            text-decoration: none; transition: 0.25s ease;
+        }
+        .doc-actions a:hover, .doc-actions button:hover {
+            border-color: rgba(0,229,255,0.3); background: rgba(0,229,255,0.08);
+        }
+        .doc-frame-wrap { position: relative; background: #0c0d10; }
+        .doc-frame { width: 100%; height: 100%; border: none; background: #fff; }
+        .doc-loading {
+            position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+            color: var(--text-muted); font-weight: 700; pointer-events: none;
+        }
+
+        /* Pressure / obstacle section */
+        .obstacle-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 28px;
+        }
+        .obstacle-card {
+            padding: 26px;
+            border-radius: 24px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            min-height: 200px;
+        }
+        .obstacle-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
+        .obstacle-card p { color: var(--text-muted); }
+        @media (max-width: 800px) { .obstacle-grid { grid-template-columns: 1fr; } }
+
+        /* FAQ */
+        .faq-list {
+            display: grid;
+            gap: 16px;
+            margin-top: 26px;
+        }
+        .faq-item {
+            border-radius: 22px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            overflow: hidden;
+            transition: 0.3s ease;
+        }
+        .faq-item.active { border-color: rgba(0,229,255,0.3); box-shadow: 0 12px 32px rgba(0,229,255,0.08); }
+        .faq-question {
+            width: 100%;
+            background: transparent;
+            color: #fff;
+            border: none;
+            text-align: left;
+            padding: 22px 24px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+        .faq-question:hover { transform: none; box-shadow: none; background: rgba(255,255,255,0.02); }
+        .faq-icon { transition: transform 0.3s ease; color: var(--quant-cyan); font-size: 1.2rem; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+            padding: 0 24px;
+        }
+        .faq-answer p { color: var(--text-muted); padding: 0 0 22px; }
+
+        /* Pulse / form / audio */
         .pulse-border {
             position: relative; border-radius: 30px; background: rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); animation: pulse 2s infinite;
+            box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); animation: pulse 2.4s infinite;
         }
-        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.25); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
 
+        .pulse-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 24px;
+            align-items: start;
+        }
+        .pulse-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 24px;
+            backdrop-filter: blur(16px);
+        }
+        .chip-wrap {
+            display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 22px;
+        }
+        .idea-chip {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 12px 16px; border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
+            color: #fff; cursor: pointer; font-weight: 700; transition: 0.25s ease; font-size: 0.95rem;
+        }
+        .idea-chip:hover {
+            border-color: rgba(0,229,255,0.3); background: rgba(0,229,255,0.08); transform: translateY(-2px);
+        }
+        .audio-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
+        .audio-card p { color: var(--text-muted); margin-bottom: 18px; }
+        .audio-actions {
+            display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;
+        }
+        .audio-btn {
+            width: auto; padding: 14px 18px; font-size: 0.95rem;
+        }
+        .audio-meta {
+            display: flex; align-items: center; justify-content: space-between; gap: 16px;
+            color: var(--text-muted); font-size: 0.95rem; margin-bottom: 10px;
+        }
+        .visualizer-shell {
+            height: 180px; border-radius: 20px;
+            background: linear-gradient(180deg, rgba(0,229,255,0.06), rgba(255,255,255,0.02));
+            border: 1px solid rgba(255,255,255,0.08); overflow: hidden; position: relative;
+        }
+        #audio-visualizer {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .share-row {
+            display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px;
+        }
+        .share-btn {
+            width: auto; padding: 14px 18px; font-size: 0.9rem;
+        }
+        .subtle-note {
+            color: var(--text-muted); font-size: 0.95rem; margin-top: 14px;
+        }
+        @media (max-width: 1100px) {
+            .pulse-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Inputs / buttons */
         input, textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 16px; color: #fff; font-size: 1.2rem; margin-bottom: 20px; outline: none; transition: 0.3s; }
         input:focus, textarea:focus { border-color: var(--quant-cyan); background: rgba(255,255,255,0.05); }
         button { background: #fff; color: #000; padding: 20px 40px; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; width: 100%; transition: 0.3s; letter-spacing: 1px; }
@@ -102,6 +391,34 @@
         /* Blockquote */
         blockquote { font-size: 1.8rem; font-weight: 600; font-style: italic; border-left: 4px solid var(--quant-cyan); padding-left: 20px; margin: 40px 0; color: #fff; }
 
+        /* Footer */
+        footer {
+            padding: 36px 0 50px;
+            position: relative;
+            z-index: 10;
+        }
+        .footer-inner {
+            display: flex; justify-content: space-between; gap: 20px; align-items: center; flex-wrap: wrap;
+            color: var(--text-muted); font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            section { padding: 10vh 0; min-height: auto; }
+            .hero-copy-grid { grid-template-columns: 1fr; }
+            .hero-copy-card, .hero-copy-card.wide { grid-column: span 1; }
+            .text-3d { font-size: clamp(3rem, 16vw, 5rem); }
+            .tilt-wrapper { position: relative; top: auto; max-width: 360px; }
+            .tilt-card::after { font-size: 2.4rem; bottom: -10px; right: -10px; }
+            .hero-actions { flex-direction: column; align-items: stretch; }
+            .hero-actions button, .hero-actions .ghost-btn { width: 100%; min-width: 0; }
+            .doc-preview-btn { width: 100%; }
+            .doc-shell { width: 100%; height: 90vh; }
+            .doc-topbar { flex-direction: column; align-items: flex-start; }
+            .doc-actions { width: 100%; }
+            .doc-actions a, .doc-actions button { width: 100%; text-align: center; }
+            .faq-question { font-size: 1rem; }
+        }
     </style>
 </head>
 <body>
@@ -114,34 +431,66 @@
                 <div class="gs-reveal" style="z-index: 2;">
                     <div><span class="typewriter" id="type-text"></span><span class="cursor"></span></div>
                     <h1 class="text-3d" style="margin-bottom: 20px;">I DON'T WANT TO RUN.<br>I WANT <span class="gradient-text">US TO WIN.</span></h1>
-                        <p class="lead">
-                          You might have friends running, and I respect that. But this decision isn’t about popularity. It’s about who will actually show up when your club needs funding.
-</p>
 
-<p class="lead">
-  I’m Blake Bird. Every Monday, I leave class early to be at Finance Board helping clubs get approved. I want clubs spending real money and doing amazing things, not getting blindsided or denied because they didn’t understand the process. I want to reach out before meetings, help them prepare, and be there for them, because this is genuinely my favorite part of the role. And if someone needs me, I go. Whether it is a call about an event change, a suggestion, a meeting, picking something up, or stepping in when another team member is busy or something comes up, I am there. No hesitation. No excuses.
-</p>
+                    <div class="mini-chip-row">
+                        <div class="mini-chip">Funding</div>
+                        <div class="mini-chip">Execution</div>
+                        <div class="mini-chip">Real Change</div>
+                        <div class="mini-chip">24-Hour Response</div>
+                    </div>
 
-<p class="lead">
-  Because this role isn’t a title to me, it is a responsibility.
-</p>
+                    <div class="hero-copy-grid">
+                        <div class="hero-copy-card wide gs-reveal">
+                            <p class="lead">
+                              You might have friends running, and I respect that. But this decision isn’t about popularity. It’s about who will actually show up when your club needs funding.
+                            </p>
+                        </div>
 
-<p class="lead">
-  At High Point, I trust we choose leaders based on who delivers, not who they know. Because we all want the same thing: better events, real change, and unforgettable memories. And that only happens with a team that is locked in, not divided.
-</p>
+                        <div class="hero-copy-card wide gs-reveal">
+                            <p class="lead">
+                              I’m Blake Bird. Every Monday, I leave class early to be at Finance Board helping clubs get approved. I want clubs spending real money and doing amazing things, not getting blindsided or denied because they didn’t understand the process. I want to reach out before meetings, help them prepare, and be there for them, because this is genuinely my favorite part of the role. And if someone needs me, I go. Whether it is a call about an event change, a suggestion, a meeting, picking something up, or stepping in when another team member is busy or something comes up, I am there. No hesitation. No excuses.
+                            </p>
+                        </div>
 
-<p class="lead">
-  So no matter who wins president or any position, I will support them fully and make sure we execute at the highest level.
-</p>
+                        <div class="hero-copy-card gs-reveal">
+                            <p class="lead">
+                              Because this role isn’t a title to me, it is a responsibility.
+                            </p>
+                        </div>
 
-<p class="lead">
-  If you want someone who will give everything, every time, vote Blake Bird for Treasurer.
-</p>
-                    <button onclick="document.getElementById('guarantee').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
+                        <div class="hero-copy-card gs-reveal">
+                            <p class="lead">
+                              At High Point, I trust we choose leaders based on who delivers, not who they know. Because we all want the same thing: better events, real change, and unforgettable memories. And that only happens with a team that is locked in, not divided.
+                            </p>
+                        </div>
+
+                        <div class="hero-copy-card gs-reveal">
+                            <p class="lead">
+                              So no matter who wins president or any position, I will support them fully and make sure we execute at the highest level.
+                            </p>
+                        </div>
+
+                        <div class="hero-copy-card gs-reveal">
+                            <p class="lead">
+                              If you want someone who will give everything, every time, vote Blake Bird for Treasurer.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="hero-actions">
+                        <button onclick="document.getElementById('guarantee').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
+                        <a href="#pipeline" class="ghost-btn">See the Process</a>
+                        <button type="button" class="ghost-btn" onclick="shareSite()" style="max-width: 220px;">Share Site</button>
+                    </div>
                 </div>
                 
                 <div class="tilt-wrapper gs-reveal">
                     <div class="tilt-card" id="profile"></div>
+                    <div class="profile-badges">
+                        <div class="profile-badge">Finance Board</div>
+                        <div class="profile-badge">Quant Intern</div>
+                        <div class="profile-badge">Class of 2029</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -154,35 +503,67 @@
                         Life is not measured in line items. It is measured in the moments we create, how easy we make campus life, and whether people actually get to enjoy the four years they are paying for. I am not here to gatekeep budgets. I am here to turn ideas into experiences, remove unnecessary friction, and help clubs create events, opportunities, and a better day-to-day life on campus. My favorite part of this role is helping clubs understand the process before meetings, walk in prepared, and leave funded instead of blindsided. I will work alongside every presidential candidate to ensure their vision does not stay an idea, but becomes a funded reality. Outside of this, I have already secured a quantitative trading internship, so I am not here for a resume line. This is where I choose to invest my time because I genuinely care about making this campus better.
                     </p>
 
-                    <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin: 10px auto 0; max-width: 900px;">
-                        <a href="resume.pdf" target="_blank" rel="noopener noreferrer"
-                           onmouseover="this.style.transform='translateY(-8px) scale(1.02) rotateX(3deg)'; this.style.boxShadow='0 24px 60px rgba(0,229,255,0.18)'; this.style.borderColor='rgba(0,229,255,0.45)'"
-                           onmouseout="this.style.transform='translateY(0) scale(1) rotateX(0deg)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.25)'; this.style.borderColor='rgba(255,255,255,0.08)'"
-                           style="text-decoration: none; color: #fff; width: 320px; min-height: 190px; padding: 26px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,229,255,0.04)); backdrop-filter: blur(18px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); transition: 0.35s ease; transform-style: preserve-3d; display: flex; flex-direction: column; justify-content: space-between; text-align: left;">
+                    <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin: 22px auto 0; max-width: 900px;">
+                        <button type="button" class="doc-preview-btn gs-reveal" data-file="resume.pdf" data-title="Research Resume" data-subtitle="Quant, research, modeling, technical depth, and the intensive work behind how I think." style="background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(0,229,255,0.04));">
                             <div>
                                 <div style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: var(--quant-cyan); margin-bottom: 10px; font-weight: 800;">View Proof</div>
                                 <div style="font-size: 1.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px;">Research Resume</div>
                                 <div style="color: var(--text-muted); font-size: 1rem;">Quant, research, modeling, technical depth, and the intensive work behind how I think.</div>
                             </div>
-                            <div style="font-size: 1rem; font-weight: 800; color: #fff;">Open PDF ↗</div>
-                        </a>
+                            <div style="font-size: 1rem; font-weight: 800; color: #fff;">Preview PDF ↗</div>
+                        </button>
 
-                        <a href="common-app-essay.pdf" target="_blank" rel="noopener noreferrer"
-                           onmouseover="this.style.transform='translateY(-8px) scale(1.02) rotateX(3deg)'; this.style.boxShadow='0 24px 60px rgba(168,85,247,0.20)'; this.style.borderColor='rgba(168,85,247,0.45)'"
-                           onmouseout="this.style.transform='translateY(0) scale(1) rotateX(0deg)'; this.style.boxShadow='0 12px 30px rgba(0,0,0,0.25)'; this.style.borderColor='rgba(255,255,255,0.08)'"
-                           style="text-decoration: none; color: #fff; width: 320px; min-height: 190px; padding: 26px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.08); background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(168,85,247,0.06)); backdrop-filter: blur(18px); box-shadow: 0 12px 30px rgba(0,0,0,0.25); transition: 0.35s ease; transform-style: preserve-3d; display: flex; flex-direction: column; justify-content: space-between; text-align: left;">
+                        <button type="button" class="doc-preview-btn gs-reveal" data-file="common-app-essay.pdf" data-title="Common App Essay" data-subtitle="Motivation, pressure, ambition, and the long-term vision that drives everything I do." style="background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(168,85,247,0.06)); box-shadow: 0 12px 30px rgba(0,0,0,0.25);">
                             <div>
                                 <div style="font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: #c084fc; margin-bottom: 10px; font-weight: 800;">View Vision</div>
                                 <div style="font-size: 1.8rem; font-weight: 900; line-height: 1.1; margin-bottom: 10px;">Common App Essay</div>
                                 <div style="color: var(--text-muted); font-size: 1rem;">Motivation, pressure, ambition, and the long-term vision that drives everything I do.</div>
                             </div>
-                            <div style="font-size: 1rem; font-weight: 800; color: #fff;">Open PDF ↗</div>
-                        </a>
+                            <div style="font-size: 1rem; font-weight: 800; color: #fff;">Preview PDF ↗</div>
+                        </button>
                     </div>
 
                     <blockquote style="text-align: left; max-width: 800px; margin: 40px auto 0;">
                         "Treat effort as a privilege and failure as signal." 
                     </blockquote>
+                </div>
+            </div>
+        </section>
+
+        <section id="pipeline">
+            <div class="container">
+                <div class="gs-reveal">
+                    <div class="section-kicker">How I Help Clubs</div>
+                    <h2 style="font-size: clamp(2.5rem, 5vw, 4.7rem); line-height: 1.05; margin-bottom: 16px;">YOUR IDEA.<br><span class="gradient-text">FUNDED. BUILT. REAL.</span></h2>
+                    <p class="lead" style="max-width: 920px;">
+                        Treasurer should not feel confusing. It should feel clear, fast, and useful. This is the path from a student idea to a campus experience people actually remember.
+                    </p>
+                </div>
+
+                <div class="pipeline-grid">
+                    <div class="pipeline-step gs-reveal">
+                        <div class="pipeline-number">01 / REACH OUT</div>
+                        <h3>Tell Me What You Want to Build</h3>
+                        <p>Before a meeting, before a deadline, before you get denied. Reach out early so the process starts strong instead of rushed.</p>
+                    </div>
+
+                    <div class="pipeline-step gs-reveal">
+                        <div class="pipeline-number">02 / TIGHTEN IT</div>
+                        <h3>Budget, Links, Forms, Contracts</h3>
+                        <p>I help clubs tighten the details that matter: numbers, taxes, purchase requests, forms, outside approvals, and weak spots that can slow everything down.</p>
+                    </div>
+
+                    <div class="pipeline-step gs-reveal">
+                        <div class="pipeline-number">03 / WALK IN READY</div>
+                        <h3>Prepared, Not Blindsided</h3>
+                        <p>The goal is simple: you understand the process, feel confident going into the meeting, and know exactly what your proposal needs.</p>
+                    </div>
+
+                    <div class="pipeline-step gs-reveal">
+                        <div class="pipeline-number">04 / MAKE IT HAPPEN</div>
+                        <h3>Idea to Event</h3>
+                        <p>Funding should turn into something real: better events, better opportunities, and a campus experience people actually enjoy while they are here.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -222,9 +603,94 @@
             </div>
         </section>
 
+        <section id="pressure">
+            <div class="container">
+                <div class="gs-reveal">
+                    <div class="section-kicker">When Things Get Stuck</div>
+                    <h2 style="font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.08; margin-bottom: 14px;">REAL OBSTACLES.<br><span class="gradient-text">REAL ANSWERS.</span></h2>
+                    <p class="lead" style="max-width: 900px;">
+                        This role is not just numbers on paper. It is problem-solving when the process gets messy, deadlines get close, or something that should have been easy starts slowing everything down.
+                    </p>
+                </div>
+
+                <div class="obstacle-grid">
+                    <div class="obstacle-card gs-reveal">
+                        <h3>Outside Contracts</h3>
+                        <p>Some of the most frustrating delays happen when approvals leave the simple lane and start touching contracts, outside vendors, or extra process steps. That is where execution matters.</p>
+                    </div>
+                    <div class="obstacle-card gs-reveal">
+                        <h3>Last-Minute Changes</h3>
+                        <p>Event shifts, quantity changes, new ideas, missing links, new pricing, or small details can break momentum fast. Fast response matters because momentum matters.</p>
+                    </div>
+                    <div class="obstacle-card gs-reveal">
+                        <h3>Budget Defenses</h3>
+                        <p>Showing up prepared changes outcomes. Strong numbers, clean organization, and confidence in the room can turn a weak position into a funded result.</p>
+                    </div>
+                    <div class="obstacle-card gs-reveal">
+                        <h3>Red Tape</h3>
+                        <p>Students should not have to feel lost just to get something approved. The goal is simple: clarity before the meeting, not confusion after it.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="container">
+                <div class="bento-item col-12 gs-reveal">
+                    <div class="section-kicker">Clear Answers</div>
+                    <h2 style="font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.05; margin-bottom: 12px;">WHAT PEOPLE ACTUALLY<br><span class="gradient-text">WANT TO KNOW.</span></h2>
+                    <p class="lead" style="max-width: 860px;">
+                        Most people do not need more campaign talk. They need clarity. Here is the practical side of how I want this role to work.
+                    </p>
+
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <button class="faq-question" type="button">
+                                <span>How does club funding actually work with you?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>You reach out early, send what you have, and I help tighten the weak spots before the meeting. The goal is to make sure clubs understand the process and do not walk in confused.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" type="button">
+                                <span>Can I reach out before a Finance Board meeting?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Yes. That is the whole point. I would rather help before a club gets blindsided than explain after the fact why something got stuck or denied.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" type="button">
+                                <span>What if my club gets denied or slowed down?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>Then we look at what broke: links, tax, contracts, pricing, forms, or presentation. The job is not just saying yes or no. It is helping people understand what changes the outcome.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <button class="faq-question" type="button">
+                                <span>What can the treasurer actually change?</span>
+                                <span class="faq-icon">+</span>
+                            </button>
+                            <div class="faq-answer">
+                                <p>The treasurer can make the process more useful, more responsive, more organized, and easier to understand. That means fewer unnecessary barriers and more ideas turning into real campus experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="guarantee">
             <div class="container">
-                <div class="bento-item pulse-border gs-reveal" style="max-width: 900px; margin: 0 auto;">
+                <div class="bento-item pulse-border gs-reveal" style="max-width: 1200px; margin: 0 auto;">
                     <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px;">THE 24-HOUR <span class="gradient-text">PULSE.</span></h2>
                     <p class="lead">
                         I understand I may not be your favorite, but I promise I will be the hardest worker. If there is a change you want to see on campus, tell me right now. I will read it, analyze it, and text you a response in under 24 hours. 
@@ -234,18 +700,95 @@
                         Direct Line: bbird1@highpoint.edu | 843-813-8108 
                     </p>
 
-                    <form action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <input type="text" name="name" placeholder="Your Name (Optional)">
-                            <input type="tel" name="phone" placeholder="Cell Number (I will text you)" required>
+                    <div class="pulse-grid">
+                        <div class="pulse-card">
+                            <div class="section-kicker">Your Voice Matters</div>
+                            <div class="chip-wrap">
+                                <button type="button" class="idea-chip">Parking</button>
+                                <button type="button" class="idea-chip">Golf Carts</button>
+                                <button type="button" class="idea-chip">Bigger Events</button>
+                                <button type="button" class="idea-chip">Club Funding</button>
+                                <button type="button" class="idea-chip">Less Red Tape</button>
+                                <button type="button" class="idea-chip">Communication</button>
+                            </div>
+
+                            <form action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
+                                <input type="hidden" name="_next" value="thankyou.html">
+                                <input type="hidden" name="_subject" value="New 24-Hour Pulse Submission">
+                                <input type="text" name="_gotcha" style="display:none">
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                    <input type="text" name="name" placeholder="Your Name (Optional)">
+                                    <input type="tel" name="phone" placeholder="Cell Number (I will text you)" required>
+                                </div>
+                                <textarea id="suggestion-box" name="suggestion" rows="4" placeholder="What is the one thing we need to fix or fund?" required></textarea>
+                                <button type="submit">Send Directly to Blake</button>
+                            </form>
+
+                            <div class="share-row">
+                                <button type="button" class="ghost-btn share-btn" onclick="shareSite()">Share This Site</button>
+                                <button type="button" class="ghost-btn share-btn" onclick="copyLink()">Copy Link</button>
+                            </div>
+
+                            <p class="subtle-note">After you submit, you will land on a thank-you page with a direct next-step message and a quick way to share this site with someone else.</p>
                         </div>
-                        <textarea name="suggestion" rows="4" placeholder="What is the one thing we need to fix or fund?" required></textarea>
-                        <button type="submit">Send Directly to Blake</button>
-                    </form>
+
+                        <div class="pulse-card audio-card">
+                            <div class="section-kicker">Campus Pulse</div>
+                            <h3>Play the Energy</h3>
+                            <p>This section powers the site with a live visualizer and adds reactive motion across the page. Use your own audio file to make the experience feel alive without changing the campaign message.</p>
+
+                            <div class="audio-actions">
+                                <button type="button" id="audio-toggle" class="audio-btn">Play the Pulse</button>
+                                <button type="button" id="audio-mute" class="ghost-btn audio-btn">Mute</button>
+                            </div>
+
+                            <div class="audio-meta">
+                                <span id="audio-status">Audio idle</span>
+                                <span id="audio-time">00:00</span>
+                            </div>
+
+                            <div class="visualizer-shell">
+                                <canvas id="audio-visualizer" width="800" height="300"></canvas>
+                            </div>
+
+                            <audio id="pulse-audio" preload="auto" crossorigin="anonymous">
+                                <source src="campus-pulse.mp3" type="audio/mpeg">
+                            </audio>
+
+                            <p class="subtle-note">Replace <strong>campus-pulse.mp3</strong> with your actual sound file. The background particles, glow, and visualizer will react when it plays.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
+
+    <footer>
+        <div class="container footer-inner">
+            <div>Built for the Class of 2029.</div>
+            <div>Blake Bird for Treasurer.</div>
+        </div>
+    </footer>
+
+    <div class="doc-modal" id="doc-modal" aria-hidden="true">
+        <div class="doc-shell">
+            <div class="doc-topbar">
+                <div class="doc-title-wrap">
+                    <h3 id="doc-modal-title">Document Preview</h3>
+                    <p id="doc-modal-subtitle">Previewing file.</p>
+                </div>
+                <div class="doc-actions">
+                    <a id="doc-open-tab" href="#" target="_blank" rel="noopener noreferrer">Open in New Tab</a>
+                    <button type="button" id="doc-close">Close</button>
+                </div>
+            </div>
+            <div class="doc-frame-wrap">
+                <div class="doc-loading" id="doc-loading">Loading preview...</div>
+                <iframe id="doc-frame" class="doc-frame" title="Document preview"></iframe>
+            </div>
+        </div>
+    </div>
 
     <script>
         // 1. ADVANCED TYPEWRITER EFFECT
@@ -264,12 +807,13 @@
         // 2. 3D TILT EFFECT FOR PROFILE CARD
         const profileCard = document.getElementById('profile');
         document.addEventListener('mousemove', (e) => {
+            if (!profileCard) return;
             const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
             const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
             profileCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         });
 
-        // 3. GSAP SCROLL ANIMATIONS (APPLE TIER)
+        // 3. GSAP SCROLL ANIMATIONS
         gsap.registerPlugin(ScrollTrigger);
         gsap.utils.toArray('.gs-reveal').forEach(element => {
             gsap.fromTo(element, 
@@ -286,11 +830,230 @@
             );
         });
 
-        // 4. THREE.JS DYNAMIC PARTICLE WAVE ("THE PULSE")
+        // 4. FAQ
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const button = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+            button.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    other.classList.remove('active');
+                    other.querySelector('.faq-answer').style.maxHeight = null;
+                });
+                if (!isActive) {
+                    item.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
+        });
+
+        // 5. Suggestion chips
+        const suggestionBox = document.getElementById('suggestion-box');
+        document.querySelectorAll('.idea-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                if (!suggestionBox) return;
+                const label = chip.textContent.trim();
+                suggestionBox.value = `I want to see a change in ${label.toLowerCase()}.`;
+                suggestionBox.focus();
+            });
+        });
+
+        // 6. Document preview modal
+        const docModal = document.getElementById('doc-modal');
+        const docFrame = document.getElementById('doc-frame');
+        const docTitle = document.getElementById('doc-modal-title');
+        const docSubtitle = document.getElementById('doc-modal-subtitle');
+        const docOpenTab = document.getElementById('doc-open-tab');
+        const docClose = document.getElementById('doc-close');
+        const docLoading = document.getElementById('doc-loading');
+
+        function openDocModal(file, title, subtitle) {
+            docTitle.textContent = title || 'Document Preview';
+            docSubtitle.textContent = subtitle || 'Previewing file.';
+            docOpenTab.href = file;
+            docFrame.src = file;
+            docLoading.style.display = 'flex';
+            docModal.classList.add('active');
+            docModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDocModal() {
+            docModal.classList.remove('active');
+            docModal.setAttribute('aria-hidden', 'true');
+            docFrame.src = '';
+            document.body.style.overflow = '';
+        }
+
+        docFrame.addEventListener('load', () => {
+            docLoading.style.display = 'none';
+        });
+
+        document.querySelectorAll('.doc-preview-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                openDocModal(
+                    btn.dataset.file,
+                    btn.dataset.title,
+                    btn.dataset.subtitle
+                );
+            });
+        });
+
+        docClose.addEventListener('click', closeDocModal);
+        docModal.addEventListener('click', (e) => {
+            if (e.target === docModal) closeDocModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && docModal.classList.contains('active')) closeDocModal();
+        });
+
+        // 7. Share helpers
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Site link copied.');
+            }).catch(() => {
+                alert('Copy failed. You can copy the URL manually.');
+            });
+        }
+
+        async function shareSite() {
+            const data = {
+                title: 'Blake Bird | SGA Treasurer 2029',
+                text: "Check out Blake Bird's SGA Treasurer campaign site.",
+                url: window.location.href
+            };
+            if (navigator.share) {
+                try {
+                    await navigator.share(data);
+                } catch (e) {}
+            } else {
+                copyLink();
+            }
+        }
+
+        // 8. Audio visualizer + reactive site integration
+        const audio = document.getElementById('pulse-audio');
+        const audioToggle = document.getElementById('audio-toggle');
+        const audioMute = document.getElementById('audio-mute');
+        const audioStatus = document.getElementById('audio-status');
+        const audioTime = document.getElementById('audio-time');
+        const canvas = document.getElementById('audio-visualizer');
+        const ctx = canvas.getContext('2d');
+
+        let audioCtx, analyser, sourceNode, dataArray, bufferLength;
+        let audioReactiveBoost = 0;
+        let audioInitialized = false;
+
+        async function initAudio() {
+            if (audioInitialized) return;
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = audioCtx.createAnalyser();
+            analyser.fftSize = 256;
+            bufferLength = analyser.frequencyBinCount;
+            dataArray = new Uint8Array(bufferLength);
+            sourceNode = audioCtx.createMediaElementSource(audio);
+            sourceNode.connect(analyser);
+            analyser.connect(audioCtx.destination);
+            audioInitialized = true;
+        }
+
+        async function toggleAudio() {
+            try {
+                await initAudio();
+                if (audioCtx.state === 'suspended') await audioCtx.resume();
+                if (audio.paused) {
+                    await audio.play();
+                    document.body.classList.add('audio-active');
+                    audioToggle.textContent = 'Pause the Pulse';
+                    audioStatus.textContent = 'Audio playing';
+                } else {
+                    audio.pause();
+                    document.body.classList.remove('audio-active');
+                    audioToggle.textContent = 'Play the Pulse';
+                    audioStatus.textContent = 'Audio paused';
+                }
+            } catch (e) {
+                audioStatus.textContent = 'Audio file not found';
+            }
+        }
+
+        audioToggle.addEventListener('click', toggleAudio);
+        audioMute.addEventListener('click', async () => {
+            audio.muted = !audio.muted;
+            audioMute.textContent = audio.muted ? 'Unmute' : 'Mute';
+        });
+
+        audio.addEventListener('ended', () => {
+            document.body.classList.remove('audio-active');
+            audioToggle.textContent = 'Play the Pulse';
+            audioStatus.textContent = 'Audio ended';
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            const mins = String(Math.floor(audio.currentTime / 60)).padStart(2, '0');
+            const secs = String(Math.floor(audio.currentTime % 60)).padStart(2, '0');
+            audioTime.textContent = `${mins}:${secs}`;
+        });
+
+        function drawVisualizer() {
+            requestAnimationFrame(drawVisualizer);
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const rect = canvas.getBoundingClientRect();
+            if (canvas.width !== rect.width * dpr || canvas.height !== rect.height * dpr) {
+                canvas.width = rect.width * dpr;
+                canvas.height = rect.height * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            const width = rect.width;
+            const height = rect.height;
+
+            ctx.clearRect(0, 0, width, height);
+
+            if (analyser && dataArray) {
+                analyser.getByteFrequencyData(dataArray);
+                const average = dataArray.reduce((sum, v) => sum + v, 0) / dataArray.length;
+                audioReactiveBoost = average / 255;
+
+                const barCount = 48;
+                const step = Math.floor(dataArray.length / barCount);
+                const barWidth = width / barCount;
+
+                for (let i = 0; i < barCount; i++) {
+                    const value = dataArray[i * step] / 255;
+                    const barHeight = Math.max(6, value * height * 0.9);
+                    const x = i * barWidth;
+                    const y = height - barHeight;
+
+                    const grad = ctx.createLinearGradient(0, y, 0, height);
+                    grad.addColorStop(0, 'rgba(255,255,255,0.95)');
+                    grad.addColorStop(0.45, 'rgba(0,229,255,0.95)');
+                    grad.addColorStop(1, 'rgba(58,0,120,0.85)');
+                    ctx.fillStyle = grad;
+                    ctx.fillRect(x + 2, y, Math.max(4, barWidth - 6), barHeight);
+                }
+            } else {
+                audioReactiveBoost = Math.max(0, audioReactiveBoost - 0.02);
+                const t = performance.now() * 0.002;
+                const bars = 40;
+                const barWidth = width / bars;
+                for (let i = 0; i < bars; i++) {
+                    const value = (Math.sin(t + i * 0.35) + 1) * 0.5;
+                    const barHeight = 18 + value * height * 0.35;
+                    const x = i * barWidth;
+                    const y = height - barHeight;
+                    ctx.fillStyle = 'rgba(255,255,255,0.18)';
+                    ctx.fillRect(x + 2, y, Math.max(4, barWidth - 6), barHeight);
+                }
+            }
+        }
+        drawVisualizer();
+
+        // 9. THREE.JS DYNAMIC PARTICLE WAVE ("THE PULSE")
         const initWebGL = () => {
             const container = document.getElementById('canvas-container');
             const scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x030305, 0.001); // Depth blending
+            scene.fog = new THREE.FogExp2(0x030305, 0.001);
 
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
             camera.position.z = 600;
@@ -301,27 +1064,22 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
 
-            // Create organic mathematical wave structure
             const geometry = new THREE.BufferGeometry();
             const particlesCount = 8000;
             const posArray = new Float32Array(particlesCount * 3);
-            const scales = new Float32Array(particlesCount);
 
-            let i = 0, j = 0;
+            let i = 0;
             for (let ix = 0; ix < 100; ix++) {
                 for (let iy = 0; iy < 80; iy++) {
-                    posArray[i] = ix * 30 - 1500;    // x
-                    posArray[i + 1] = 0;             // y (calculated in animation)
-                    posArray[i + 2] = iy * 30 - 1000; // z
-                    scales[j] = 1;
-                    i += 3; j++;
+                    posArray[i] = ix * 30 - 1500;
+                    posArray[i + 1] = 0;
+                    posArray[i + 2] = iy * 30 - 1000;
+                    i += 3;
                 }
             }
 
             geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
 
-            // Custom Shader Material for glowing dots
             const material = new THREE.PointsMaterial({
                 color: 0x00e5ff,
                 size: 4,
@@ -335,38 +1093,33 @@
 
             let count = 0;
             let targetY = 0;
-            
-            // Link camera height to user scroll for parallax
             window.addEventListener('scroll', () => { targetY = window.scrollY * 0.3; });
 
             const tick = () => {
                 const positions = particlesMesh.geometry.attributes.position.array;
-                const scales = particlesMesh.geometry.attributes.scale.array;
-                let i = 0, j = 0;
+                let i = 0;
+                const amp = 1 + audioReactiveBoost * 1.4;
 
-                // Mathematical sine wave propagation (representing Quant models & campus energy)
                 for (let ix = 0; ix < 100; ix++) {
                     for (let iy = 0; iy < 80; iy++) {
-                        positions[i + 1] = (Math.sin((ix + count) * 0.3) * 50) + (Math.sin((iy + count) * 0.5) * 50);
-                        scales[j] = (Math.sin((ix + count) * 0.3) + 1) * 2 + (Math.sin((iy + count) * 0.5) + 1) * 2;
-                        i += 3; j++;
+                        positions[i + 1] = ((Math.sin((ix + count) * 0.3) * 50) + (Math.sin((iy + count) * 0.5) * 50)) * amp;
+                        i += 3;
                     }
                 }
 
                 particlesMesh.geometry.attributes.position.needsUpdate = true;
-                particlesMesh.geometry.attributes.scale.needsUpdate = true;
+                material.opacity = 0.45 + audioReactiveBoost * 0.4;
+                material.size = 3.5 + audioReactiveBoost * 3.5;
                 
-                // Smooth camera parallax
                 camera.position.y += (-targetY + 200 - camera.position.y) * 0.05;
                 camera.lookAt(scene.position);
 
-                count += 0.05;
+                count += 0.05 + audioReactiveBoost * 0.02;
                 renderer.render(scene, camera);
                 window.requestAnimationFrame(tick);
             };
             tick();
 
-            // Resize handler
             window.addEventListener('resize', () => {
                 camera.aspect = window.innerWidth / window.innerHeight;
                 camera.updateProjectionMatrix();
