@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blake Bird | The Quant Treasurer</title>
+    <title>Blake Bird | SGA Treasurer 2029</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -11,195 +11,189 @@
 
     <style>
         /* =========================================
-           CORE SYSTEM & CUSTOM CURSOR
+           CORE ARCHITECTURE & VARIABLES
            ========================================= */
         :root {
-            --bg-deep: #020203;
-            --quant-cyan: #00f0ff;
-            --alert-red: #ff003c;
-            --glass: rgba(255, 255, 255, 0.03);
+            --bg-dark: #030305;
+            --hpu-purple: #3a0078;
+            --quant-cyan: #00e5ff;
+            --glass-bg: rgba(255, 255, 255, 0.02);
             --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #ffffff;
+            --text-muted: #86868b;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; font-family: -apple-system, "SF Pro Display", sans-serif; }
-        body { background-color: var(--bg-deep); color: #fff; overflow-x: hidden; perspective: 1000px; }
-
-        /* Custom Cursor */
-        .cursor-dot { width: 8px; height: 8px; background: var(--quant-cyan); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-        .cursor-outline { width: 40px; height: 40px; border: 1px solid var(--quant-cyan); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; }
-
-        /* =========================================
-           TERMINAL BOOT SEQUENCE
-           ========================================= */
-        #terminal-loader {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 10000; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px; font-family: monospace; color: var(--quant-cyan);
-        }
-        .term-line { margin-bottom: 8px; font-size: 1.2rem; opacity: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); overflow-x: hidden; line-height: 1.6; }
+        
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 229, 255, 0.3); border-radius: 10px; }
 
         /* =========================================
-           3D CANVAS & LAYOUT
+           WEBGL 3D BACKGROUND
            ========================================= */
-        #webgl-canvas { position: fixed; top: 0; left: 0; z-index: 0; pointer-events: none; opacity: 0.6; }
+        #canvas-container { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.8; }
         main { position: relative; z-index: 10; }
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 5vw; }
-        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; position: relative; padding: 10vh 0; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 5vw; }
+        section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 12vh 0; position: relative; }
 
         /* =========================================
-           TYPOGRAPHY & 3D TEXT EFFECTS
+           TYPOGRAPHY & 3D EFFECTS
            ========================================= */
         .text-3d {
-            font-size: clamp(4rem, 10vw, 8rem);
-            font-weight: 900;
-            line-height: 1;
-            text-transform: uppercase;
-            letter-spacing: -0.05em;
-            color: #fff;
-            text-shadow: 
-                0px 1px 0px #ccc, 0px 2px 0px #c9c9c9, 0px 3px 0px #bbb,
-                0px 4px 0px #b9b9b9, 0px 5px 0px #aaa, 0px 6px 1px rgba(0,0,0,.1),
-                0px 0px 5px rgba(0,0,0,.1), 0px 1px 3px rgba(0,0,0,.3),
-                0px 3px 5px rgba(0,0,0,.2), 0px 5px 10px rgba(0,0,0,.25),
-                0px 10px 10px rgba(0,0,0,.2), 0px 20px 20px rgba(0, 240, 255, 0.15);
-            transform-style: preserve-3d;
+            font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900; line-height: 1.05; letter-spacing: -0.04em; text-transform: uppercase;
+            text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0, 229, 255, 0.15);
         }
-
         .gradient-text { background: linear-gradient(135deg, #fff, var(--quant-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        p.lead { font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: #a1a1aa; line-height: 1.6; max-width: 800px; margin: 30px 0; }
+        .purple-gradient { background: linear-gradient(135deg, #fff, #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        p.lead { font-size: clamp(1.2rem, 2.5vw, 1.6rem); color: var(--text-muted); max-width: 800px; margin-bottom: 2rem; font-weight: 400; }
+
+        /* Typewriter */
+        .typewriter { font-size: 1.5rem; font-weight: 700; color: var(--quant-cyan); margin-bottom: 1rem; display: inline-block; letter-spacing: 2px; text-transform: uppercase; }
+        .cursor { display: inline-block; width: 3px; height: 1.2em; background: var(--quant-cyan); animation: blink 1s infinite; vertical-align: middle; margin-left: 5px; }
+        @keyframes blink { 50% { opacity: 0; } }
 
         /* =========================================
-           TICKER TAPE (ATTENTION SPAN HOOK)
+           ROTATING PROFILE CARD (HERO)
            ========================================= */
-        .ticker-wrap { width: 100%; overflow: hidden; background: var(--quant-cyan); color: #000; padding: 15px 0; transform: rotate(-2deg) scale(1.1); margin: 50px 0; box-shadow: 0 0 30px rgba(0, 240, 255, 0.3); }
-        .ticker { display: inline-block; white-space: nowrap; font-weight: 800; font-size: 1.5rem; text-transform: uppercase; animation: ticker 20s linear infinite; }
-        @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
-        /* =========================================
-           3D ROTATING PROFILE CARD
-           ========================================= */
-        .hero-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
-        @media (max-width: 968px) { .hero-layout { grid-template-columns: 1fr; } }
-
+        .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        @media (max-width: 968px) { .hero-grid { grid-template-columns: 1fr; } }
+        
+        .tilt-wrapper { perspective: 1000px; width: 100%; max-width: 450px; margin: 0 auto; }
         .tilt-card {
-            width: 100%; aspect-ratio: 3/4; max-width: 450px; margin: 0 auto;
-            border-radius: 30px; border: 2px solid var(--glass-border);
-            background: url('your-image.jpg') center/cover; /* REPLACE WITH YOUR PICTURE */
-            box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 0 0 2px rgba(255,255,255,0.1);
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-            position: relative;
+            width: 100%; aspect-ratio: 3/4; border-radius: 30px; border: 1px solid var(--glass-border);
+            background: url('your-image.jpg') center/cover; /* REPLACE THIS IMAGE */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.2);
+            transform-style: preserve-3d; transition: transform 0.1s; position: relative;
         }
         .tilt-card::after {
             content: "BLAKE BIRD"; position: absolute; bottom: -20px; right: -20px;
-            font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--quant-cyan);
-            transform: translateZ(50px); pointer-events: none;
+            font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+            transform: translateZ(60px); pointer-events: none; white-space: nowrap;
         }
 
         /* =========================================
-           BENTO GRID & PSYCHOLOGY PANELS
+           BENTO BOX GRID (GLASSMORPHISM)
            ========================================= */
-        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 20px; }
-        .bento { background: var(--glass); border: 1px solid var(--glass-border); border-radius: 24px; padding: 40px; backdrop-filter: blur(10px); position: relative; overflow: hidden; transition: border 0.3s; }
-        .bento:hover { border-color: var(--quant-cyan); }
+        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; margin-top: 40px; }
+        .bento-item { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 30px; padding: 40px; position: relative; overflow: hidden; transition: 0.4s ease; }
+        .bento-item:hover { border-color: var(--quant-cyan); transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0, 229, 255, 0.1); }
         .col-8 { grid-column: span 8; } .col-4 { grid-column: span 4; } .col-12 { grid-column: span 12; }
-        @media (max-width: 900px) { .col-8, .col-4 { grid-column: span 12; } }
-
-        .big-number { font-size: 5rem; font-weight: 900; color: var(--quant-cyan); line-height: 1; margin-bottom: 10px; }
-
+        @media (max-width: 968px) { .col-8, .col-4 { grid-column: span 12; } }
+        
+        .stat { font-size: 4.5rem; font-weight: 900; color: var(--quant-cyan); line-height: 1; margin-bottom: 10px; }
+        
         /* =========================================
-           THE FORMS & BUTTONS
+           PULSING GUARANTEE FORM
            ========================================= */
-        input, textarea { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--glass-border); padding: 20px; border-radius: 12px; color: #fff; font-size: 1.2rem; margin-bottom: 15px; }
-        input:focus, textarea:focus { outline: none; border-color: var(--quant-cyan); }
-        .btn-glitch { 
-            background: #fff; color: #000; padding: 20px 40px; font-size: 1.5rem; font-weight: 900; 
-            text-transform: uppercase; border-radius: 50px; border: none; width: 100%; position: relative; 
-            overflow: hidden; transition: 0.3s; 
+        .pulse-border {
+            position: relative; border-radius: 30px; background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); animation: pulse 2s infinite;
         }
-        .btn-glitch:hover { background: var(--quant-cyan); box-shadow: 0 0 40px var(--quant-cyan); transform: scale(1.02); }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(0, 229, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 229, 255, 0); } }
+
+        input, textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); padding: 20px; border-radius: 16px; color: #fff; font-size: 1.2rem; margin-bottom: 20px; outline: none; transition: 0.3s; }
+        input:focus, textarea:focus { border-color: var(--quant-cyan); background: rgba(255,255,255,0.05); }
+        button { background: #fff; color: #000; padding: 20px 40px; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; border: none; border-radius: 50px; cursor: pointer; width: 100%; transition: 0.3s; letter-spacing: 1px; }
+        button:hover { background: var(--quant-cyan); box-shadow: 0 0 30px var(--quant-cyan); transform: scale(1.02); }
+
+        /* Blockquote */
+        blockquote { font-size: 1.8rem; font-weight: 600; font-style: italic; border-left: 4px solid var(--quant-cyan); padding-left: 20px; margin: 40px 0; color: #fff; }
 
     </style>
 </head>
 <body>
 
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
-
-    <div id="terminal-loader">
-        <div class="term-line" id="line1">> INITIALIZING CAMPUS PULSE DISCOVERY ENGINE... [cite: 25]</div>
-        <div class="term-line" id="line2">> LOADING QUANTUM-WALK MARKET MODELS... [cite: 12, 65]</div>
-        <div class="term-line" id="line3">> BYPASSING UI BOTTLENECKS... <50ms LATENCY... [cite: 22, 23]</div>
-        <div class="term-line" id="line4">> ACCESS GRANTED. WELCOME TO THE NEW SGA.</div>
-    </div>
-
-    <div id="webgl-canvas"></div>
+    <div id="canvas-container"></div>
 
     <main>
         <section id="hero">
-            <div class="container hero-layout">
-                <div class="hero-content">
-                    <p style="color: var(--quant-cyan); font-weight: 800; letter-spacing: 2px; margin-bottom: 10px;" id="typewriter"></p>
-                    <h1 class="text-3d fly-in">I DON'T WANT TO RUN.<br>I WANT US TO WIN.</h1>
-                    <p class="lead fly-in">
-                        You have friends running. I respect that bond. But your friend doesn't know how to optimize a budget using stochastic calculus. Vote for the person who will actually secure the bag for your club.
+            <div class="container hero-grid">
+                <div class="gs-reveal" style="z-index: 2;">
+                    <div><span class="typewriter" id="type-text"></span><span class="cursor"></span></div>
+                    <h1 class="text-3d" style="margin-bottom: 20px;">I DON'T WANT TO RUN.<br>I WANT <span class="gradient-text">US TO WIN.</span></h1>
+                    <p class="lead">
+                        You have friends running. I respect that bond. But this isn't about popularity; it's about making sure your club gets funded. I am Blake Bird[cite: 3]. I give 110%, I leave class early for budget meetings, and I support the team who wins because the Class of 2029 [cite: 7, 60] deserves a unified front.
                     </p>
-                    <button class="btn-glitch" onclick="document.getElementById('guarantee').scrollIntoView();">Hold Me Accountable</button>
+                    <button onclick="document.getElementById('guarantee').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
                 </div>
                 
-                <div class="tilt-container">
-                    <div class="tilt-card" id="profile-card"></div>
+                <div class="tilt-wrapper gs-reveal">
+                    <div class="tilt-card" id="profile"></div>
                 </div>
             </div>
         </section>
 
-        <div class="ticker-wrap">
-            <div class="ticker">
-                NOT A GATEKEEPER. A PROVIDER. /// SGA TREASURER 2029 /// LEAVING CLASS EARLY FOR YOUR BUDGET /// NOT A GATEKEEPER. A PROVIDER. /// SGA TREASURER 2029 /// LEAVING CLASS EARLY FOR YOUR BUDGET ///
+        <section id="philosophy">
+            <div class="container">
+                <div class="bento-item col-12 gs-reveal" style="text-align: center; border-color: var(--hpu-purple);">
+                    <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 20px;">NOT A GATEKEEPER.<br><span class="purple-gradient">A PROVIDER.</span></h2>
+                    <p class="lead" style="margin: 0 auto;">
+                        Life isn't measured in line items; it is about creating memories. I am not running to pad my resume[cite: 64, 99]. My absolute favorite thing to do is approve funds, watch clubs spend money, and see incredible campus events happen. I will work alongside every presidential candidate to ensure their vision becomes a funded reality.
+                    </p>
+                    <blockquote style="text-align: left; max-width: 800px; margin: 40px auto 0;">
+                        "Treat effort as a privilege and failure as signal." [cite: 50, 98]
+                    </blockquote>
+                </div>
             </div>
-        </div>
+        </section>
 
         <section id="proof">
-            <div class="container bento-grid">
-                
-                <div class="bento col-12 stick-out" style="text-align: center;">
-                    <h2 style="font-size: 3rem;">"Treat effort as a privilege and failure as signal."</h2>
-                    <p style="color: var(--quant-cyan); margin-top: 10px;"></p>
-                </div>
+            <div class="container">
+                <h2 style="font-size: 3rem; margin-bottom: 2rem;" class="gs-reveal">The <span class="gradient-text">Engine</span> Behind the Vision.</h2>
+                <div class="bento-grid">
+                    
+                    <div class="bento-item col-8 gs-reveal">
+                        <h3 style="font-size: 2rem; margin-bottom: 15px;">Why a Quant Trader?</h3>
+                        <p class="lead" style="font-size: 1.1rem; margin-bottom: 0;">
+                            I am pursuing Math Economics, Physics, CS, and Mathematics[cite: 5, 58]. This summer, I secured a Quantitative Trading internship paying $10,000 a month. I am trusted to optimize millions of dollars using algorithms with under 50ms latency[cite: 22, 75]. If I can do that, I can guarantee your budget is managed perfectly.
+                        </p>
+                    </div>
 
-                <div class="bento col-8 stick-out">
-                    <h3 style="font-size: 2.5rem; margin-bottom: 20px;">Why a <span class="gradient-text">Quant Trader?</span></h3>
-                    <p class="lead">This summer, I secured a Quant Trading internship paying $10,000/month. Why? Because I build systems that optimize millions of dollars with zero latency. I built an iOS event app for 500+ students here. [cite: 25] I will bring that exact Wall Street rigor to the SGA budget.</p>
-                </div>
+                    <div class="bento-item col-4 gs-reveal">
+                        <div class="stat">800</div>
+                        <h3 style="font-size: 1.5rem;">SAT Math Score</h3>
+                        <p style="color: var(--text-muted); margin-top: 10px;">The budget isn't a guessing game. It requires exact precision.</p>
+                    </div>
 
-                <div class="bento col-4 stick-out">
-                    <div class="big-number">800</div>
-                    <h3 style="font-size: 1.5rem;">Perfect Math SAT</h3>
-                    <p style="color: #888; margin-top: 10px;">If I can handle complex non-Gaussian returns[cite: 14], I can make sure your club's pizza party gets funded seamlessly.</p>
-                </div>
+                    <div class="bento-item col-4 gs-reveal">
+                        <div class="stat">110%</div>
+                        <h3 style="font-size: 1.5rem;">Odds Against Us</h3>
+                        <p style="color: var(--text-muted); margin-top: 10px;">I was the only person who showed up to the budget defense. Result? We secured more money than we requested.</p>
+                    </div>
 
-                <div class="bento col-4 stick-out">
-                    <div class="big-number">110%</div>
-                    <h3 style="font-size: 1.5rem;">Boots on the Ground</h3>
-                    <p style="color: #888; margin-top: 10px;">I was the ONLY person to show up to the budget defense. Result? We got more money than requested.</p>
-                </div>
+                    <div class="bento-item col-8 gs-reveal">
+                        <h3 style="font-size: 2rem; margin-bottom: 15px;">Pre-Planned Structural Changes</h3>
+                        <p class="lead" style="font-size: 1.1rem; margin-bottom: 0;">
+                            Last year, I coded a Swift app for 500+ SGA users[cite: 25]. Over the summer, we will build a flawless financial system. I will meet 1-on-1 with every club to guarantee you know how to get your events approved without red tape.
+                        </p>
+                    </div>
 
-                <div class="bento col-8 stick-out">
-                    <h3 style="font-size: 2.5rem; margin-bottom: 20px;">The Pre-Planned <span class="gradient-text">System.</span></h3>
-                    <p class="lead">Last year, I scaled the Hedge Fund Society to 50+ members. [cite: 35, 37, 80, 82] Next semester, we won't be guessing. I will meet 1-on-1 with every club to guarantee your money clears.</p>
                 </div>
             </div>
         </section>
 
         <section id="guarantee">
             <div class="container">
-                <div class="bento col-12 stick-out" style="max-width: 800px; margin: 0 auto; background: rgba(0, 240, 255, 0.05); border-color: var(--quant-cyan);">
-                    <h2 class="text-3d" style="font-size: 4rem; margin-bottom: 20px;">THE 24HR GUARANTEE</h2>
-                    <p class="lead">Tell me what needs to change. I promise a personal response in under 24 hours.</p>
+                <div class="bento-item pulse-border gs-reveal" style="max-width: 900px; margin: 0 auto;">
+                    <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px;">THE 24-HOUR <span class="gradient-text">PULSE.</span></h2>
+                    <p class="lead">
+                        I understand I may not be your favorite, but I promise I will be the hardest worker. If there is a change you want to see on campus, tell me right now. I will read it, analyze it, and text you a response in under 24 hours. 
+                    </p>
                     
+                    <p style="color: var(--quant-cyan); font-weight: bold; margin-bottom: 30px;">
+                        Direct Line: bbird1@highpoint.edu [cite: 6, 59] | 843-813-8108 [cite: 1, 53]
+                    </p>
+
                     <form action="https://formspree.io/f/YOUR_ENDPOINT_HERE" method="POST">
-                        <input type="text" name="name" placeholder="Who are you? (Optional)">
-                        <input type="tel" name="phone" placeholder="Cell Number (I will text you)" required>
-                        <textarea name="suggestion" rows="4" placeholder="What is the one thing SGA needs to fix right now?" required></textarea>
-                        <button type="submit" class="btn-glitch">SEND DIRECT TO BLAKE</button>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <input type="text" name="name" placeholder="Your Name (Optional)">
+                            <input type="tel" name="phone" placeholder="Cell Number (I will text you)" required>
+                        </div>
+                        <textarea name="suggestion" rows="4" placeholder="What is the one thing we need to fix or fund?" required></textarea>
+                        <button type="submit">Send Directly to Blake</button>
                     </form>
                 </div>
             </div>
@@ -207,98 +201,134 @@
     </main>
 
     <script>
-        // --- 1. CUSTOM CURSOR LOGIC ---
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX; const posY = e.clientY;
-            cursorDot.style.left = `${posX}px`; cursorDot.style.top = `${posY}px`;
-            cursorOutline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
-        });
-        document.querySelectorAll('a, button, input, textarea').forEach(el => {
-            el.addEventListener('mouseenter', () => cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)');
-            el.addEventListener('mouseleave', () => cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)');
-        });
-
-        // --- 2. TERMINAL BOOT SEQUENCE ---
-        const termLines = document.querySelectorAll('.term-line');
-        const loader = document.getElementById('terminal-loader');
-        let delay = 0;
-        termLines.forEach((line, index) => {
-            setTimeout(() => { line.style.opacity = 1; }, delay);
-            delay += 600; // Type each line
-        });
-        setTimeout(() => {
-            gsap.to(loader, { y: "-100%", duration: 1, ease: "power4.inOut" });
-            initHeroAnimations();
-        }, delay + 500);
-
-        // --- 3. TYPEWRITER ---
-        const words = ["> SYSTEM: MATHEMATICAL ECONOMIST", "> SYSTEM: QUANTITATIVE TRADER", "> SYSTEM: YOUR TREASURER"];
+        // 1. ADVANCED TYPEWRITER EFFECT
+        const words = ["Mathematical Economist.", "Computer Scientist.", "Memory Maker.", "Treasurer, Class of '29."];
         let i = 0, j = 0, isDeleting = false;
         function typeWriter() {
-            const el = document.getElementById("typewriter");
+            const el = document.getElementById("type-text");
             const current = words[i];
             el.textContent = isDeleting ? current.substring(0, j--) : current.substring(0, j++);
-            if (!isDeleting && j === current.length + 1) { isDeleting = true; setTimeout(typeWriter, 1500); return; }
+            if (!isDeleting && j === current.length + 1) { isDeleting = true; setTimeout(typeWriter, 2000); return; }
             if (isDeleting && j === 0) { isDeleting = false; i = (i + 1) % words.length; }
-            setTimeout(typeWriter, isDeleting ? 30 : 80);
+            setTimeout(typeWriter, isDeleting ? 40 : 100);
         }
         typeWriter();
 
-        // --- 4. 3D TILT PROFILE CARD ---
-        const card = document.getElementById('profile-card');
+        // 2. 3D TILT EFFECT FOR PROFILE CARD
+        const profileCard = document.getElementById('profile');
         document.addEventListener('mousemove', (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
-            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+            profileCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
         });
 
-        // --- 5. GSAP "STICK OUT" & SCROLL ANIMATIONS ---
+        // 3. GSAP SCROLL ANIMATIONS (APPLE TIER)
         gsap.registerPlugin(ScrollTrigger);
-        function initHeroAnimations() {
-            gsap.fromTo(".fly-in", { z: -500, opacity: 0, rotationX: 45 }, { z: 0, opacity: 1, rotationX: 0, duration: 1.5, stagger: 0.2, ease: "back.out(1.7)" });
-        }
-        
-        gsap.utils.toArray('.stick-out').forEach(box => {
-            gsap.fromTo(box, 
-                { z: -200, scale: 0.8, opacity: 0, rotationY: 15 }, 
-                { z: 0, scale: 1, opacity: 1, rotationY: 0, duration: 1, ease: "power3.out", 
-                  scrollTrigger: { trigger: box, start: "top 80%", toggleActions: "play none none reverse" } 
+        gsap.utils.toArray('.gs-reveal').forEach(element => {
+            gsap.fromTo(element, 
+                { y: 60, opacity: 0, scale: 0.98 }, 
+                {
+                    y: 0, opacity: 1, scale: 1,
+                    duration: 1, ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 85%", 
+                        toggleActions: "play none none reverse"
+                    }
                 }
             );
         });
 
-        // --- 6. THREE.JS PARTICLE MATRIX BACKGROUND ---
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
-        camera.position.z = 800;
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.getElementById('webgl-canvas').appendChild(renderer.domElement);
+        // 4. THREE.JS DYNAMIC PARTICLE WAVE ("THE PULSE")
+        const initWebGL = () => {
+            const container = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x030305, 0.001); // Depth blending
 
-        const geom = new THREE.BufferGeometry();
-        const particles = 3000;
-        const pos = new Float32Array(particles * 3);
-        for(let i=0; i<particles*3; i++) pos[i] = (Math.random() - 0.5) * 2000;
-        geom.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-        const mat = new THREE.PointsMaterial({ color: 0x00f0ff, size: 3, transparent: true, opacity: 0.6 });
-        const mesh = new THREE.Points(geom, mat);
-        scene.add(mesh);
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
+            camera.position.z = 600;
+            camera.position.y = 200;
 
-        let targetY = 0;
-        window.addEventListener('scroll', () => { targetY = window.scrollY * 0.5; });
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
 
-        function animate3D() {
-            requestAnimationFrame(animate3D);
-            mesh.rotation.y += 0.001;
-            mesh.rotation.x += 0.0005;
-            camera.position.y += (-targetY - camera.position.y) * 0.05; // Parallax
-            renderer.render(scene, camera);
-        }
-        animate3D();
+            // Create organic mathematical wave structure
+            const geometry = new THREE.BufferGeometry();
+            const particlesCount = 8000;
+            const posArray = new Float32Array(particlesCount * 3);
+            const scales = new Float32Array(particlesCount);
+
+            let i = 0, j = 0;
+            for (let ix = 0; ix < 100; ix++) {
+                for (let iy = 0; iy < 80; iy++) {
+                    posArray[i] = ix * 30 - 1500;    // x
+                    posArray[i + 1] = 0;             // y (calculated in animation)
+                    posArray[i + 2] = iy * 30 - 1000; // z
+                    scales[j] = 1;
+                    i += 3; j++;
+                }
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            geometry.setAttribute('scale', new THREE.BufferAttribute(scales, 1));
+
+            // Custom Shader Material for glowing dots
+            const material = new THREE.PointsMaterial({
+                color: 0x00e5ff,
+                size: 4,
+                transparent: true,
+                opacity: 0.6,
+                blending: THREE.AdditiveBlending
+            });
+
+            const particlesMesh = new THREE.Points(geometry, material);
+            scene.add(particlesMesh);
+
+            let count = 0;
+            let targetY = 0;
+            
+            // Link camera height to user scroll for parallax
+            window.addEventListener('scroll', () => { targetY = window.scrollY * 0.3; });
+
+            const tick = () => {
+                const positions = particlesMesh.geometry.attributes.position.array;
+                const scales = particlesMesh.geometry.attributes.scale.array;
+                let i = 0, j = 0;
+
+                // Mathematical sine wave propagation (representing Quant models & campus energy)
+                for (let ix = 0; ix < 100; ix++) {
+                    for (let iy = 0; iy < 80; iy++) {
+                        positions[i + 1] = (Math.sin((ix + count) * 0.3) * 50) + (Math.sin((iy + count) * 0.5) * 50);
+                        scales[j] = (Math.sin((ix + count) * 0.3) + 1) * 2 + (Math.sin((iy + count) * 0.5) + 1) * 2;
+                        i += 3; j++;
+                    }
+                }
+
+                particlesMesh.geometry.attributes.position.needsUpdate = true;
+                particlesMesh.geometry.attributes.scale.needsUpdate = true;
+                
+                // Smooth camera parallax
+                camera.position.y += (-targetY + 200 - camera.position.y) * 0.05;
+                camera.lookAt(scene.position);
+
+                count += 0.05;
+                renderer.render(scene, camera);
+                window.requestAnimationFrame(tick);
+            };
+            tick();
+
+            // Resize handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        };
         
-        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+        // Boot Engine
+        window.onload = initWebGL;
     </script>
 </body>
 </html>
