@@ -1038,6 +1038,12 @@ document.querySelectorAll('.idea-chip').forEach(chip => {
         }
         drawVisualizer();
 
+        /* TALLY DARK MODE OVERRIDE */
+iframe[data-tally-src],
+iframe#tally-frame {
+    filter: invert(1) hue-rotate(180deg);
+}
+
         // 9. THREE.JS DYNAMIC PARTICLE WAVE ("THE PULSE")
         const initWebGL = () => {
             const container = document.getElementById('canvas-container');
