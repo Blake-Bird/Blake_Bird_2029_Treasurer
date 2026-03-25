@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blake Bird | SGA Treasurer 2029</title>
+    <title>Blake Bird + Sean Lewis Colbert Jr | SGA 2029 Ticket</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -419,6 +419,441 @@
             .doc-actions a, .doc-actions button { width: 100%; text-align: center; }
             .faq-question { font-size: 1rem; }
         }
+
+        /* Sean VP section */
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 26px;
+            align-items: stretch;
+            margin-top: 28px;
+        }
+        .ticket-photo-card {
+            position: relative;
+            min-height: 540px;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background:
+                linear-gradient(180deg, rgba(3,3,5,0.05), rgba(3,3,5,0.45)),
+                url('sean-lewis-colbolt-jr.jpg') center/cover;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 60px rgba(0,229,255,0.08);
+        }
+        .ticket-photo-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(3,3,5,0.18) 38%, rgba(3,3,5,0.82) 100%);
+        }
+        .ticket-photo-label {
+            position: absolute;
+            left: 26px;
+            right: 26px;
+            bottom: 24px;
+            z-index: 2;
+        }
+        .ticket-photo-label .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--quant-cyan);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+        .ticket-photo-label .eyebrow::before {
+            content: "";
+            width: 26px;
+            height: 1px;
+            background: rgba(0,229,255,0.8);
+            box-shadow: 0 0 10px rgba(0,229,255,0.8);
+        }
+        .ticket-photo-label h3 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.02;
+            margin-bottom: 8px;
+        }
+        .ticket-photo-label p {
+            color: rgba(255,255,255,0.82);
+            font-size: 1rem;
+            max-width: 480px;
+        }
+        .ticket-copy-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .ticket-copy-card .lead {
+            max-width: none;
+        }
+        .ticket-points {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+        .ticket-point {
+            border-radius: 22px;
+            padding: 22px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(16px);
+            transition: 0.3s ease;
+        }
+        .ticket-point:hover {
+            border-color: rgba(0,229,255,0.28);
+            box-shadow: 0 16px 36px rgba(0,229,255,0.08);
+            transform: translateY(-3px);
+        }
+        .ticket-point h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .ticket-point p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            margin: 0;
+        }
+        .ticket-chip-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 22px;
+        }
+        .ticket-chip {
+            padding: 10px 14px;
+            border-radius: 999px;
+            font-size: 0.84rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.92);
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        @media (max-width: 1050px) {
+            .ticket-grid {
+                grid-template-columns: 1fr;
+            }
+            .ticket-photo-card {
+                min-height: 460px;
+            }
+        }
+        @media (max-width: 700px) {
+            .ticket-points {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* =========================================
+           FINAL TICKET POLISH & AMBIENT EFFECTS
+           ========================================= */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+        body::before {
+            background:
+                radial-gradient(circle at 12% 14%, rgba(0,229,255,0.12), transparent 26%),
+                radial-gradient(circle at 86% 20%, rgba(168,85,247,0.12), transparent 24%),
+                radial-gradient(circle at 50% 70%, rgba(0,229,255,0.08), transparent 34%),
+                linear-gradient(180deg, rgba(255,255,255,0.015), transparent 18%, transparent 82%, rgba(255,255,255,0.015));
+            filter: blur(2px);
+        }
+        body::after {
+            background:
+                repeating-linear-gradient(
+                    180deg,
+                    rgba(255,255,255,0.018) 0px,
+                    rgba(255,255,255,0.018) 1px,
+                    transparent 2px,
+                    transparent 10px
+                );
+            opacity: 0.28;
+            mix-blend-mode: screen;
+        }
+        #canvas-container {
+            opacity: 0.96;
+        }
+        #canvas-container canvas {
+            filter: saturate(1.38) brightness(1.08) contrast(1.06);
+        }
+
+        .hero-ticket-bar {
+            position: relative;
+            margin: 22px 0 20px;
+            padding: 18px 20px 16px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background:
+                linear-gradient(135deg, rgba(0,229,255,0.09), rgba(58,0,120,0.10)),
+                rgba(255,255,255,0.025);
+            box-shadow: 0 18px 46px rgba(0,0,0,0.22), 0 0 38px rgba(0,229,255,0.08);
+            backdrop-filter: blur(18px);
+            overflow: hidden;
+        }
+        .hero-ticket-bar::before {
+            content: "";
+            position: absolute;
+            inset: -30% auto auto -10%;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,229,255,0.24), transparent 68%);
+            filter: blur(18px);
+            opacity: 0.8;
+        }
+        .hero-ticket-label {
+            position: relative;
+            z-index: 1;
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 2.2px;
+            font-weight: 900;
+            color: var(--quant-cyan);
+            margin-bottom: 8px;
+        }
+        .hero-ticket-names {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            font-size: clamp(1.05rem, 2vw, 1.25rem);
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+        .hero-ticket-names em {
+            font-style: normal;
+            color: rgba(255,255,255,0.72);
+            font-weight: 700;
+        }
+        .hero-ticket-divider {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(0,229,255,0.6) 48%, transparent 72%);
+            box-shadow: 0 0 16px rgba(0,229,255,0.55);
+            flex: 0 0 auto;
+        }
+        .hero-ticket-links {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tilt-wrapper {
+            perspective: 1600px;
+        }
+        .tilt-card {
+            overflow: hidden;
+            will-change: transform;
+            backface-visibility: hidden;
+            transition: box-shadow 0.35s ease, filter 0.35s ease;
+            box-shadow:
+                0 38px 80px rgba(0,0,0,0.44),
+                inset 0 0 0 1px rgba(255,255,255,0.18),
+                0 0 90px rgba(0,229,255,0.15);
+            filter: saturate(1.06) contrast(1.04);
+        }
+        .tilt-card::before {
+            inset: -26px;
+            background:
+                radial-gradient(circle at 50% 50%, rgba(0,229,255,0.22), transparent 58%),
+                radial-gradient(circle at 75% 18%, rgba(168,85,247,0.18), transparent 42%);
+            filter: blur(26px);
+        }
+        .tilt-card::after {
+            content: "BLAKE + SEAN";
+            bottom: -16px;
+            right: -12px;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            letter-spacing: 1px;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.18);
+            text-shadow: 0 0 20px rgba(0,229,255,0.08);
+        }
+        .tilt-grid-overlay,
+        .tilt-glare,
+        .tilt-noise,
+        .tilt-meta {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        .tilt-grid-overlay {
+            background:
+                linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mix-blend-mode: soft-light;
+            opacity: 0.12;
+            mask-image: linear-gradient(180deg, rgba(0,0,0,0.06), rgba(0,0,0,0.8));
+            animation: gridDrift 14s linear infinite;
+        }
+        .tilt-noise {
+            background:
+                radial-gradient(circle at 18% 20%, rgba(255,255,255,0.08), transparent 14%),
+                radial-gradient(circle at 82% 24%, rgba(255,255,255,0.07), transparent 12%),
+                radial-gradient(circle at 38% 74%, rgba(255,255,255,0.05), transparent 15%);
+            mix-blend-mode: screen;
+            opacity: 0.5;
+        }
+        .tilt-glare {
+            background: radial-gradient(circle at 50% 15%, rgba(255,255,255,0.34), rgba(0,229,255,0.12) 20%, rgba(255,255,255,0.02) 42%, transparent 70%);
+            mix-blend-mode: screen;
+            opacity: 0.9;
+            transition: background 0.18s linear, opacity 0.2s ease;
+        }
+        .tilt-meta {
+            inset: auto 18px 18px 18px;
+            padding: 18px 18px 16px;
+            border-radius: 22px;
+            background: linear-gradient(180deg, rgba(3,3,5,0.05), rgba(3,3,5,0.72));
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+            z-index: 2;
+        }
+        .tilt-kicker {
+            color: var(--quant-cyan);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        .tilt-meta h3 {
+            font-size: 1.5rem;
+            line-height: 1.04;
+            margin-bottom: 6px;
+        }
+        .tilt-meta p {
+            color: rgba(255,255,255,0.78);
+            font-size: 0.96rem;
+            line-height: 1.45;
+            margin: 0;
+        }
+        @keyframes gridDrift {
+            0% { transform: translate3d(0,0,0); }
+            50% { transform: translate3d(-18px,-12px,0); }
+            100% { transform: translate3d(0,0,0); }
+        }
+
+        .partner-panel,
+        .direct-line-panel {
+            margin-top: 18px;
+            border-radius: 24px;
+            padding: 18px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(16px);
+            box-shadow: 0 18px 40px rgba(0,0,0,0.18);
+        }
+        .partner-panel-title,
+        .direct-line-title {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 900;
+            color: var(--quant-cyan);
+            margin-bottom: 10px;
+        }
+        .partner-panel h4 {
+            font-size: 1.25rem;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        .partner-panel p {
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            font-size: 0.98rem;
+        }
+        .contact-pills,
+        .ticket-contact-row,
+        .footer-direct-lines,
+        .direct-line-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .contact-pill {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 12px 16px;
+            border-radius: 999px;
+            font-size: 0.9rem;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            text-decoration: none;
+            color: #fff;
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.12);
+            transition: 0.25s ease;
+        }
+        .contact-pill:hover {
+            border-color: rgba(0,229,255,0.36);
+            background: rgba(0,229,255,0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 0 24px rgba(0,229,255,0.12);
+        }
+
+        .direct-line-panel {
+            margin-bottom: 30px;
+            background:
+                linear-gradient(135deg, rgba(0,229,255,0.07), rgba(168,85,247,0.06)),
+                rgba(255,255,255,0.02);
+        }
+
+        .ticket-photo-label p strong {
+            color: #fff;
+        }
+        .ticket-contact-row {
+            margin-top: 20px;
+        }
+
+        .footer-inner.footer-stack {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 16px 22px;
+        }
+        .footer-ticket {
+            font-weight: 800;
+            color: rgba(255,255,255,0.94);
+            text-align: right;
+        }
+        .footer-direct-lines {
+            grid-column: 1 / -1;
+        }
+
+        @media (max-width: 968px) {
+            .hero-ticket-names {
+                align-items: flex-start;
+            }
+            .hero-ticket-divider {
+                display: none;
+            }
+            .footer-inner.footer-stack {
+                grid-template-columns: 1fr;
+            }
+            .footer-ticket {
+                text-align: left;
+            }
+        }
+
+
     </style>
 </head>
 <body>
@@ -426,74 +861,111 @@
     <div id="canvas-container"></div>
 
     <main>
+
         <section id="hero">
             <div class="container hero-grid">
                 <div class="gs-reveal" style="z-index: 2;">
                     <div><span class="typewriter" id="type-text"></span><span class="cursor"></span></div>
                     <h1 class="text-3d" style="margin-bottom: 20px;">I DON'T WANT TO RUN.<br>I WANT <span class="gradient-text">US TO WIN.</span></h1>
 
+                    <div class="hero-ticket-bar gs-reveal">
+                        <div class="hero-ticket-label">Full Ticket</div>
+                        <div class="hero-ticket-names">
+                            <span>Blake Bird <em>for Treasurer</em></span>
+                            <span class="hero-ticket-divider"></span>
+                            <span>Sean Lewis Colbert Jr <em>for VP</em></span>
+                        </div>
+                        <div class="hero-ticket-links">
+                            <a class="contact-pill" href="tel:+18438138108">Blake Direct Line · 843-813-8108</a>
+                            <a class="contact-pill" href="tel:+15408404672">Sean Direct Line · +1 (540) 840-4672</a>
+                        </div>
+                    </div>
+
                     <div class="mini-chip-row">
                         <div class="mini-chip">Funding</div>
                         <div class="mini-chip">Execution</div>
                         <div class="mini-chip">Real Change</div>
                         <div class="mini-chip">24-Hour Response</div>
+                        <div class="mini-chip">Team First</div>
                     </div>
 
                     <div class="hero-copy-grid">
                         <div class="hero-copy-card wide gs-reveal">
                             <p class="lead">
-                              You might have friends running, and I respect that. But this decision isn’t about popularity. It’s about who will actually show up when your club needs funding.
+                              You might have friends running, and I respect that. But this decision is not about popularity. It is about the ticket that will actually show up, solve problems, and make campus better in real life.
                             </p>
                         </div>
 
                         <div class="hero-copy-card wide gs-reveal">
                             <p class="lead">
-                              I’m Blake Bird. Every Monday, I leave class early to be at Finance Board helping clubs get approved. I want clubs spending real money and doing amazing things, not getting blindsided or denied because they didn’t understand the process. I want to reach out before meetings, help them prepare, and be there for them, because this is genuinely my favorite part of the role. And if someone needs me, I go. Whether it is a call about an event change, a suggestion, a meeting, picking something up, or stepping in when another team member is busy or something comes up, I am there. No hesitation. No excuses.
+                              I’m Blake Bird, and I’m running alongside Sean Lewis Colbert Jr for VP. Every Monday, I leave class early to be at Finance Board helping clubs get approved. I want clubs spending real money and doing amazing things, not getting blindsided or denied because they did not understand the process. I want to reach out before meetings, help them prepare, and be there for them, because this is genuinely my favorite part of the role.
                             </p>
                         </div>
 
                         <div class="hero-copy-card gs-reveal">
                             <p class="lead">
-                              Because this role isn’t a title to me, it is a responsibility.
+                              Sean brings the same level of care on the people side: going door to door during events, checking in, resolving conflicts, helping teammates, and making sure people feel included.
                             </p>
                         </div>
 
                         <div class="hero-copy-card gs-reveal">
                             <p class="lead">
-                              At High Point, I trust we choose leaders based on who delivers, not who they know. Because we all want the same thing: better events, real change, and unforgettable memories. And that only happens with a team that is locked in, not divided.
+                              Because these roles are not titles to us. They are responsibilities, and the standard should be support, execution, communication, and energy every single time.
                             </p>
                         </div>
 
                         <div class="hero-copy-card gs-reveal">
                             <p class="lead">
-                              So no matter who wins president or any position, I will support them fully and make sure we execute at the highest level.
+                              At High Point, I trust we choose leaders based on who delivers, not who they know. We all want the same thing: better events, real change, and unforgettable memories. That only happens with a team that is locked in, not divided.
                             </p>
                         </div>
 
                         <div class="hero-copy-card gs-reveal">
                             <p class="lead">
-                              If you want someone who will give everything, every time, vote Blake Bird for Treasurer.
+                              If you want a ticket that works hard, communicates fast, brings people together, and actually gets things done, vote Blake Bird for Treasurer and Sean Lewis Colbert Jr for VP.
                             </p>
                         </div>
                     </div>
 
                     <div class="hero-actions">
                         <button onclick="document.getElementById('guarantee').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
+                        <a href="#ticket" class="ghost-btn">Meet Sean</a>
                         <a href="#pipeline" class="ghost-btn">See the Process</a>
                         <button type="button" class="ghost-btn" onclick="shareSite()" style="max-width: 220px;">Share Site</button>
                     </div>
                 </div>
-                
+
                 <div class="tilt-wrapper gs-reveal">
-                    <div class="tilt-card" id="profile"></div>
+                    <div class="tilt-card" id="profile">
+                        <div class="tilt-grid-overlay"></div>
+                        <div class="tilt-noise"></div>
+                        <div class="tilt-glare"></div>
+                        <div class="tilt-meta">
+                            <div class="tilt-kicker">Treasurer Candidate</div>
+                            <h3>Blake Bird</h3>
+                            <p>Running with Sean Lewis Colbert Jr for VP to build a harder-working, more connected Class of 2029 ticket.</p>
+                        </div>
+                    </div>
                     <div class="profile-badges">
                         <div class="profile-badge">Finance Board</div>
-                        <div class="profile-badge">Quant Intern</div>
+                        <div class="profile-badge">Sean for VP</div>
                         <div class="profile-badge">Class of 2029</div>
+                        <div class="profile-badge">Team First</div>
+                    </div>
+
+                    <div class="partner-panel">
+                        <div class="partner-panel-title">Running Together</div>
+                        <h4>Sean Lewis Colbert Jr for VP</h4>
+                        <p>Door-to-door energy, conflict resolution, real support for the team, and the kind of joyful presence people actually remember.</p>
+                        <div class="contact-pills">
+                            <a class="contact-pill" href="tel:+15408404672">Text or Call Sean</a>
+                            <a class="contact-pill" href="#ticket">See Sean’s Section</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
+
 
         <section id="philosophy">
             <div class="container">
@@ -636,17 +1108,87 @@
 
         
 
+
+        <section id="ticket">
+            <div class="container">
+                <div class="gs-reveal">
+                    <div class="section-kicker">The Team Beside Me</div>
+                    <h2 style="font-size: clamp(2.4rem, 5vw, 4.4rem); line-height: 1.06; margin-bottom: 14px;">SEAN LEWIS COLBERT JR<br><span class="gradient-text">FOR VP.</span></h2>
+                    <p class="lead" style="max-width: 980px;">
+                        Great leadership is not just one person. It is a team people can actually feel on campus. Sean Lewis Colbert Jr brings that energy naturally. He is the kind of person who goes door to door during events, checks in on people, brings others in, helps resolve conflicts before they grow, and makes everyone around him feel seen. He is joyful, thoughtful, supportive, and never afraid to give his real opinion when the team needs it.
+                    </p>
+                </div>
+
+                <div class="ticket-grid">
+                    <div class="ticket-photo-card gs-reveal">
+                        <div class="ticket-photo-label">
+                            <div class="eyebrow">VP Candidate</div>
+                            <h3>Sean Lewis Colbert Jr</h3>
+                            <p><strong>Direct line:</strong> <a href="tel:+15408404672" style="color:#fff; text-decoration:none;">+1 (540) 840-4672</a> · Add Sean’s campaign photo here and this section is ready to go.</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-item ticket-copy-card gs-reveal">
+                        <h3 style="font-size: 2rem; margin-bottom: 16px;">Why Sean fits this ticket</h3>
+                        <p class="lead" style="font-size: 1.08rem; margin-bottom: 0;">
+                            Sean helps set the tone of a team in the best way. He connects with people instead of waiting for them to come to him. During events, he is moving, checking on people, going door to door, making sure no one feels left out, and stepping in when something needs to be smoothed over. He is consistently kind, easy to talk to, and genuinely helpful, but he also brings substance. He supports the people around him while still speaking up with honest ideas and strong perspective, which makes the whole team better.
+                        </p>
+
+                        <div class="ticket-points">
+                            <div class="ticket-point gs-reveal">
+                                <h4>Door-to-door presence</h4>
+                                <p>He shows up physically and socially, moving through events, reaching out first, and making real connection happen.</p>
+                            </div>
+                            <div class="ticket-point gs-reveal">
+                                <h4>Conflict resolution</h4>
+                                <p>When tension shows up, Sean helps calm things down, keep people respected, and move the team forward.</p>
+                            </div>
+                            <div class="ticket-point gs-reveal">
+                                <h4>Joyful leadership</h4>
+                                <p>He brings a positive energy that is natural, steady, and contagious, which matters more than people realize.</p>
+                            </div>
+                            <div class="ticket-point gs-reveal">
+                                <h4>Support with a real voice</h4>
+                                <p>Sean is supportive and loyal, but not passive. He gives thoughtful opinions that strengthen decisions instead of just agreeing.</p>
+                            </div>
+                        </div>
+
+                        <div class="ticket-chip-row">
+                            <div class="ticket-chip">Connects everyone</div>
+                            <div class="ticket-chip">Resolves conflicts</div>
+                            <div class="ticket-chip">Joyful energy</div>
+                            <div class="ticket-chip">Supports the team</div>
+                            <div class="ticket-chip">Speaks up honestly</div>
+                            <div class="ticket-chip">Door to door</div>
+                        </div>
+
+                        <div class="ticket-contact-row">
+                            <a class="contact-pill" href="tel:+15408404672">Sean Direct Line · +1 (540) 840-4672</a>
+                            <a class="contact-pill" href="#guarantee">See the 24-Hour Pulse</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
         <section id="guarantee">
     <div class="container">
         <div class="bento-item pulse-border gs-reveal" style="max-width: 1200px; margin: 0 auto;">
             <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px;">THE 24-HOUR <span class="gradient-text">PULSE.</span></h2>
             <p class="lead">
-                I understand I may not be your favorite, but I promise I will be the hardest worker. If there is a change you want to see on campus, tell me right now. I will read it, analyze it, and text you a response in under 24 hours. 
+                I understand I may not be your favorite, but I promise we will be one of the hardest-working tickets on campus. If there is a change you want to see on campus, tell us right now. We will read it, analyze it, and get back to you fast.
             </p>
-            
-            <p style="color: var(--quant-cyan); font-weight: bold; margin-bottom: 30px;">
-                Direct Line: bbird1@highpoint.edu | 843-813-8108 
-            </p>
+
+            <div class="direct-line-panel">
+                <div class="direct-line-title">Direct Lines</div>
+                <div class="direct-line-grid">
+                    <a class="contact-pill" href="mailto:bbird1@highpoint.edu">Blake · bbird1@highpoint.edu</a>
+                    <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
+                    <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
+                    <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
+                </div>
+            </div>
 
             <div class="pulse-grid">
                 <div class="pulse-card">
@@ -711,9 +1253,14 @@
     </main>
 
     <footer>
-        <div class="container footer-inner">
+        <div class="container footer-inner footer-stack">
             <div>Built for the Class of 2029.</div>
-            <div>Blake Bird for Treasurer.</div>
+            <div class="footer-ticket">Blake Bird for Treasurer · Sean Lewis Colbert Jr for VP</div>
+            <div class="footer-direct-lines">
+                <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
+                <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
+                <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
+            </div>
         </div>
     </footer>
 
@@ -781,7 +1328,7 @@ document.querySelectorAll('.idea-chip').forEach(chip => {
 
     
         // 1. ADVANCED TYPEWRITER EFFECT
-        const words = ["Mathematical Economist.", "Computer Scientist.", "Memory Maker.", "Treasurer, Class of '29."];
+        const words = ["Team First.", "Treasurer + VP Ticket.", "Memory Makers.", "Class of '29 Ready."];
         let i = 0, j = 0, isDeleting = false;
         function typeWriter() {
             const el = document.getElementById("type-text");
@@ -793,14 +1340,62 @@ document.querySelectorAll('.idea-chip').forEach(chip => {
         }
         typeWriter();
 
-        // 2. 3D TILT EFFECT FOR PROFILE CARD
+        // 2. SMOOTH 3D TILT EFFECT FOR PROFILE CARD
         const profileCard = document.getElementById('profile');
-        document.addEventListener('mousemove', (e) => {
+        const tiltWrapper = document.querySelector('.tilt-wrapper');
+        const tiltGlare = profileCard ? profileCard.querySelector('.tilt-glare') : null;
+
+        let currentRotateX = 0;
+        let currentRotateY = 0;
+        let targetRotateX = 0;
+        let targetRotateY = 0;
+        let pointerInsideTilt = false;
+
+        function updateTiltGlare(px = 50, py = 15, opacity = 0.9) {
+            if (!tiltGlare) return;
+            tiltGlare.style.opacity = String(opacity);
+            tiltGlare.style.background = `radial-gradient(circle at ${px}% ${py}%, rgba(255,255,255,0.42), rgba(0,229,255,0.18) 18%, rgba(255,255,255,0.02) 42%, transparent 70%)`;
+        }
+
+        if (tiltWrapper && profileCard) {
+            tiltWrapper.addEventListener('pointerenter', () => {
+                pointerInsideTilt = true;
+            });
+
+            tiltWrapper.addEventListener('pointermove', (e) => {
+                const rect = tiltWrapper.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+
+                targetRotateY = (px - 0.5) * 16;
+                targetRotateX = (0.5 - py) * 16;
+
+                updateTiltGlare(px * 100, py * 100, 1);
+            });
+
+            tiltWrapper.addEventListener('pointerleave', () => {
+                pointerInsideTilt = false;
+                targetRotateX = 0;
+                targetRotateY = 0;
+                updateTiltGlare(50, 15, 0.88);
+            });
+        }
+
+        function animateTiltCard() {
             if (!profileCard) return;
-            const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-            const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-            profileCard.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
-        });
+            const t = performance.now() * 0.001;
+
+            const idleRotateX = pointerInsideTilt ? 0 : Math.sin(t * 0.9) * 1.8;
+            const idleRotateY = pointerInsideTilt ? 0 : Math.cos(t * 0.7) * 2.2;
+            const idleFloat = Math.sin(t * 1.2) * 6;
+
+            currentRotateX += ((targetRotateX + idleRotateX) - currentRotateX) * 0.08;
+            currentRotateY += ((targetRotateY + idleRotateY) - currentRotateY) * 0.08;
+
+            profileCard.style.transform = `rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) translateY(${idleFloat}px)`;
+            requestAnimationFrame(animateTiltCard);
+        }
+        animateTiltCard();
 
         // 3. GSAP SCROLL ANIMATIONS
         gsap.registerPlugin(ScrollTrigger);
@@ -907,8 +1502,8 @@ document.querySelectorAll('.idea-chip').forEach(chip => {
 
         async function shareSite() {
             const data = {
-                title: 'Blake Bird | SGA Treasurer 2029',
-                text: "Check out Blake Bird's SGA Treasurer campaign site.",
+                title: 'Blake Bird + Sean Lewis Colbert Jr | SGA 2029 Ticket',
+                text: "Check out Blake Bird for Treasurer and Sean Lewis Colbert Jr for VP.",
                 url: window.location.href
             };
             if (navigator.share) {
@@ -1043,72 +1638,169 @@ document.querySelectorAll('.idea-chip').forEach(chip => {
         // 9. THREE.JS DYNAMIC PARTICLE WAVE ("THE PULSE")
         const initWebGL = () => {
             const container = document.getElementById('canvas-container');
-            const scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x030305, 0.001);
+            if (!container) return;
+            container.innerHTML = '';
 
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 2000);
-            camera.position.z = 600;
-            camera.position.y = 200;
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x030305, 0.00078);
+
+            const camera = new THREE.PerspectiveCamera(72, window.innerWidth / window.innerHeight, 1, 2600);
+            camera.position.set(0, 150, 620);
 
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
 
-            const geometry = new THREE.BufferGeometry();
-            const particlesCount = 8000;
-            const posArray = new Float32Array(particlesCount * 3);
+            const gridX = 120;
+            const gridY = 86;
+            const spacing = 28;
+            const particleCount = gridX * gridY;
 
-            let i = 0;
-            for (let ix = 0; ix < 100; ix++) {
-                for (let iy = 0; iy < 80; iy++) {
-                    posArray[i] = ix * 30 - 1500;
-                    posArray[i + 1] = 0;
-                    posArray[i + 2] = iy * 30 - 1000;
-                    i += 3;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+            const accentPositions = new Float32Array(particleCount * 3);
+
+            let ptr = 0;
+            let c = 0;
+            for (let ix = 0; ix < gridX; ix++) {
+                for (let iy = 0; iy < gridY; iy++) {
+                    const x = ix * spacing - ((gridX - 1) * spacing) / 2;
+                    const z = iy * spacing - ((gridY - 1) * spacing) / 2;
+
+                    positions[ptr] = x;
+                    positions[ptr + 1] = 0;
+                    positions[ptr + 2] = z;
+
+                    accentPositions[ptr] = x + ((ix % 2 === 0) ? 8 : -8);
+                    accentPositions[ptr + 1] = 12;
+                    accentPositions[ptr + 2] = z + ((iy % 2 === 0) ? -10 : 10);
+
+                    const mix = ix / gridX;
+                    colors[c] = 0.20 + mix * 0.35;
+                    colors[c + 1] = 0.70 + mix * 0.20;
+                    colors[c + 2] = 0.90 + (1 - mix) * 0.05;
+
+                    ptr += 3;
+                    c += 3;
                 }
             }
 
-            geometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            const waveGeometry = new THREE.BufferGeometry();
+            waveGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            waveGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
-            const material = new THREE.PointsMaterial({
-                color: 0x00e5ff,
-                size: 4,
+            const accentGeometry = new THREE.BufferGeometry();
+            accentGeometry.setAttribute('position', new THREE.BufferAttribute(accentPositions, 3));
+
+            const waveMaterial = new THREE.PointsMaterial({
+                size: 4.6,
+                vertexColors: true,
                 transparent: true,
-                opacity: 0.6,
-                blending: THREE.AdditiveBlending
+                opacity: 0.70,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
             });
 
-            const particlesMesh = new THREE.Points(geometry, material);
-            scene.add(particlesMesh);
+            const accentMaterial = new THREE.PointsMaterial({
+                color: 0xa855f7,
+                size: 8,
+                transparent: true,
+                opacity: 0.16,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
 
-            let count = 0;
+            const waveMesh = new THREE.Points(waveGeometry, waveMaterial);
+            const accentMesh = new THREE.Points(accentGeometry, accentMaterial);
+            scene.add(waveMesh);
+            scene.add(accentMesh);
+
+            const starCount = 1600;
+            const starPositions = new Float32Array(starCount * 3);
+            for (let i = 0; i < starCount; i++) {
+                const base = i * 3;
+                starPositions[base] = (Math.random() - 0.5) * 2600;
+                starPositions[base + 1] = Math.random() * 1200 - 200;
+                starPositions[base + 2] = (Math.random() - 0.5) * 2600;
+            }
+
+            const starGeometry = new THREE.BufferGeometry();
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+
+            const starMaterial = new THREE.PointsMaterial({
+                color: 0xffffff,
+                size: 1.4,
+                transparent: true,
+                opacity: 0.34,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            });
+
+            const stars = new THREE.Points(starGeometry, starMaterial);
+            scene.add(stars);
+
+            const glowGeometry = new THREE.SphereGeometry(180, 32, 32);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: 0x00e5ff,
+                transparent: true,
+                opacity: 0.03
+            });
+            const glowOrb = new THREE.Mesh(glowGeometry, glowMaterial);
+            glowOrb.position.set(0, 160, -420);
+            scene.add(glowOrb);
+
             let targetY = 0;
-            window.addEventListener('scroll', () => { targetY = window.scrollY * 0.3; });
+            window.addEventListener('scroll', () => { targetY = window.scrollY; });
+
+            const clock = new THREE.Clock();
 
             const tick = () => {
-                const positions = particlesMesh.geometry.attributes.position.array;
-                let i = 0;
-                const amp = 1 + audioReactiveBoost * 1.4;
+                const t = clock.getElapsedTime();
+                const amp = 1 + audioReactiveBoost * 2.25;
 
-                for (let ix = 0; ix < 100; ix++) {
-                    for (let iy = 0; iy < 80; iy++) {
-                        positions[i + 1] = ((Math.sin((ix + count) * 0.3) * 50) + (Math.sin((iy + count) * 0.5) * 50)) * amp;
-                        i += 3;
+                const mainPositions = waveGeometry.attributes.position.array;
+                const altPositions = accentGeometry.attributes.position.array;
+
+                let index = 0;
+                for (let ix = 0; ix < gridX; ix++) {
+                    for (let iy = 0; iy < gridY; iy++) {
+                        const primary = Math.sin(ix * 0.22 + t * 1.22) * 56;
+                        const secondary = Math.cos(iy * 0.34 + t * 0.92) * 40;
+                        const cross = Math.sin((ix + iy) * 0.14 + t * 1.36) * 24;
+                        const ribbon = Math.cos((ix - iy) * 0.11 - t * 1.48) * 16;
+                        const y = (primary + secondary + cross + ribbon) * amp;
+
+                        mainPositions[index + 1] = y;
+                        altPositions[index + 1] = y * 0.56 + Math.sin(ix * 0.10 + t * 1.7) * 18 + Math.cos(iy * 0.12 + t * 1.1) * 12;
+                        index += 3;
                     }
                 }
 
-                particlesMesh.geometry.attributes.position.needsUpdate = true;
-                material.opacity = 0.45 + audioReactiveBoost * 0.4;
-                material.size = 3.5 + audioReactiveBoost * 3.5;
-                
-                camera.position.y += (-targetY + 200 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
+                waveGeometry.attributes.position.needsUpdate = true;
+                accentGeometry.attributes.position.needsUpdate = true;
 
-                count += 0.05 + audioReactiveBoost * 0.02;
+                waveMaterial.opacity = 0.58 + audioReactiveBoost * 0.32;
+                waveMaterial.size = 4.2 + audioReactiveBoost * 4.8;
+                accentMaterial.opacity = 0.12 + audioReactiveBoost * 0.24;
+                accentMaterial.size = 7.5 + audioReactiveBoost * 4.5;
+
+                waveMesh.rotation.z = Math.sin(t * 0.08) * 0.045;
+                accentMesh.rotation.z = -0.08 + Math.cos(t * 0.06) * 0.035;
+                stars.rotation.y += 0.00045;
+                stars.rotation.x = Math.sin(t * 0.05) * 0.08;
+
+                camera.position.y += ((150 - targetY * 0.14) - camera.position.y) * 0.045;
+                camera.position.x += ((Math.sin(t * 0.24) * 44) - camera.position.x) * 0.02;
+                camera.lookAt(0, 20, 0);
+
+                glowOrb.material.opacity = 0.02 + audioReactiveBoost * 0.05;
+                glowOrb.scale.setScalar(1 + audioReactiveBoost * 0.14);
+
                 renderer.render(scene, camera);
                 window.requestAnimationFrame(tick);
             };
+
             tick();
 
             window.addEventListener('resize', () => {
@@ -1117,9 +1809,9 @@ document.querySelectorAll('.idea-chip').forEach(chip => {
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
         };
-        
+
         // Boot Engine
-        window.onload = initWebGL;
+        window.addEventListener('load', initWebGL);
     </script>
 </body>
 </html>
