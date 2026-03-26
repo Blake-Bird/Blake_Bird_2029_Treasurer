@@ -557,16 +557,19 @@
             margin-top: 28px;
         }
         .president-photo-card {
-            position: relative;
-            min-height: 560px;
-            border-radius: 30px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            background:
-                linear-gradient(180deg, rgba(3,3,5,0.05), rgba(3,3,5,0.45)),
-                url('caden-white-president.jpg') center/cover;
-            box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 60px rgba(255,95,170,0.10);
-        }
+    position: relative;
+    min-height: 560px;
+    border-radius: 30px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.1);
+    background:
+        linear-gradient(180deg, rgba(3,3,5,0.05), rgba(3,3,5,0.45)),
+        url('caden-white-president.jpg');
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 60px rgba(255,95,170,0.10);
+}
         .president-photo-card::before {
             content: "";
             position: absolute;
