@@ -556,20 +556,17 @@
             align-items: stretch;
             margin-top: 28px;
         }
-      .president-photo-card {
-    position: relative;
-    min-height: 560px;
-    border-radius: 30px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.1);
-    background:
-        linear-gradient(180deg, rgba(3,3,5,0.05), rgba(3,3,5,0.45)),
-        url('caden-white-president.jpg');
-    background-size: cover;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 60px rgba(255,95,170,0.10);
-}
+        .president-photo-card {
+            position: relative;
+            min-height: 560px;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background:
+                linear-gradient(180deg, rgba(3,3,5,0.05), rgba(3,3,5,0.45)),
+                url('caden-white-president.jpg') center/cover;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 60px rgba(255,95,170,0.10);
+        }
         .president-photo-card::before {
             content: "";
             position: absolute;
@@ -955,7 +952,6 @@
                         <div class="hero-ticket-links">
                             <a class="contact-pill" href="tel:+18438138108">Blake Direct Line · 843-813-8108</a>
                             <a class="contact-pill" href="tel:+15408404672">Sean Direct Line · +1 (540) 840-4672</a>
-                            <a class="contact-pill" href="tel:+12282388535">Caden Direct Line · 228-238-8535</a>
                             <a class="contact-pill" href="#president">Meet Caden White</a>
                         </div>
                     </div>
@@ -1014,8 +1010,7 @@
                     </div>
 
                     <div class="hero-actions">
-                        <button onclick="document.getElementById('pulse-top').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
-                        <a href="#pulse-top" class="ghost-btn">Drop Your Idea</a>
+                        <button onclick="document.getElementById('guarantee').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
                         <a href="#ticket" class="ghost-btn">Meet Sean</a>
                         <a href="#president" class="ghost-btn">Meet Caden</a>
                         <a href="#pipeline" class="ghost-btn">See the Process</a>
@@ -1057,67 +1052,8 @@
                         <h4>Caden White for President</h4>
                         <p>Leadership fellow, Presidential Scholar, service-minded, polished in public-facing spaces, and deeply aligned with the kind of events and class culture people actually remember.</p>
                         <div class="contact-pills">
-                            <a class="contact-pill" href="tel:+12282388535">Text or Call Caden</a>
                             <a class="contact-pill" href="#president">See Caden’s Section</a>
-                            <a class="contact-pill" href="#pulse-top">Bring an Event Idea</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <section id="pulse-top">
-            <div class="container">
-                <div class="bento-item pulse-border gs-reveal" style="max-width: 1200px; margin: 0 auto;">
-                    <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px;">THE 24-HOUR <span class="gradient-text">PULSE.</span></h2>
-                    <p class="lead">
-                        We want people to connect with us fast, not wonder if their idea got lost. If there is a change you want to see on campus, an event you want pushed forward, or something you want this ticket to know, tell us right here at the top. We will read it, analyze it, and get back to you fast.
-                    </p>
-
-                    <div class="direct-line-panel">
-                        <div class="direct-line-title">Direct Lines</div>
-                        <div class="direct-line-grid">
-                            <a class="contact-pill" href="mailto:bbird1@highpoint.edu">Blake · bbird1@highpoint.edu</a>
-                            <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
-                            <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
-                            <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
-                            <a class="contact-pill" href="tel:+12282388535">Caden · 228-238-8535</a>
-                            <a class="contact-pill" href="#president">Caden · President Section</a>
-                        </div>
-                    </div>
-
-                    <div class="pulse-card" style="max-width: 920px; margin: 0 auto;">
-                        <div class="section-kicker">Your Voice Matters</div>
-                        <div class="chip-wrap">
-                            <button type="button" class="idea-chip">Parking</button>
-                            <button type="button" class="idea-chip">Golf Carts</button>
-                            <button type="button" class="idea-chip">Bigger Events</button>
-                            <button type="button" class="idea-chip">Club Funding</button>
-                            <button type="button" class="idea-chip">Less Red Tape</button>
-                            <button type="button" class="idea-chip">Communication</button>
-                            <button type="button" class="idea-chip">Laundry</button>
-                        </div>
-
-                        <div class="tally-form-wrap" style="border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); backdrop-filter: blur(20px);">
-                            <iframe
-                                id="tally-frame-top"
-                                class="tally-frame"
-                                data-base-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                                data-tally-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&topic="
-                                loading="lazy"
-                                width="100%"
-                                height="523"
-                                frameborder="0"
-                                marginheight="0"
-                                marginwidth="0"
-                                title="24-Hour Pulse Top">
-                            </iframe>
-                        </div>
-
-                        <div class="share-row">
-                            <button type="button" class="ghost-btn share-btn" onclick="shareSite()">Share This Site</button>
-                            <button type="button" class="ghost-btn share-btn" onclick="copyLink()">Copy Link</button>
+                            <a class="contact-pill" href="#guarantee">Bring an Event Idea</a>
                         </div>
                     </div>
                 </div>
@@ -1346,7 +1282,7 @@
                         <div class="ticket-photo-label">
                             <div class="eyebrow">President Candidate</div>
                             <h3>Caden White</h3>
-                            <p><strong>Ready to lead.</strong> Passion, excellence, experience, and the event instinct to help this class feel connected and proud. <strong>Direct line:</strong> <a href="tel:+12282388535" style="color:#fff; text-decoration:none;">228-238-8535</a></p>
+                            <p><strong>Ready to lead.</strong> Passion, excellence, experience, and the event instinct to help this class feel connected and proud.</p>
                         </div>
                     </div>
 
@@ -1420,9 +1356,8 @@
                         </div>
 
                         <div class="ticket-contact-row">
-                            <a class="contact-pill" href="tel:+12282388535">Caden Direct Line · 228-238-8535</a>
                             <a class="contact-pill" href="#hero">Back to Full Ticket</a>
-                            <a class="contact-pill" href="#pulse-top">Bring an Event Idea</a>
+                            <a class="contact-pill" href="#guarantee">Bring an Event Idea</a>
                         </div>
                     </div>
                 </div>
@@ -1446,7 +1381,6 @@
                     <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
                     <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
                     <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
-                    <a class="contact-pill" href="tel:+12282388535">Caden · 228-238-8535</a>
                     <a class="contact-pill" href="#president">Caden · President Section</a>
                 </div>
             </div>
@@ -1464,10 +1398,9 @@
                         <button type="button" class="idea-chip">Laundry</button>
                     </div>
 
-                    <div id="tally-form-wrap" class="tally-form-wrap" style="border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); backdrop-filter: blur(20px);">
+                    <div id="tally-form-wrap" style="border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); backdrop-filter: blur(20px);">
                         <iframe
                             id="tally-frame"
-                            class="tally-frame"
                             data-base-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
                             data-tally-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&topic="
                             loading="lazy"
@@ -1522,7 +1455,6 @@
                 <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
                 <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
                 <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
-                <a class="contact-pill" href="tel:+12282388535">Caden · 228-238-8535</a>
                 <a class="contact-pill" href="#president">Caden · President Section</a>
             </div>
         </div>
@@ -1569,21 +1501,24 @@ if("undefined"!=typeof Tally){
   d.body.appendChild(s);
 }
 
+const tallyFrame = document.getElementById('tally-frame');
+
 document.querySelectorAll('.idea-chip').forEach(chip => {
     chip.addEventListener('click', () => {
-        const pulseCard = chip.closest('.pulse-card');
-        const tallyFrame = pulseCard?.querySelector('.tally-frame');
-        const tallyWrap = pulseCard?.querySelector('.tally-form-wrap');
         if (!tallyFrame) return;
 
         const label = chip.textContent.trim();
         const base = tallyFrame.dataset.baseSrc;
+
         const topicValue = `I want to see a change in ${label.toLowerCase()}.`;
 
-        tallyFrame.dataset.tallySrc = `${base}&topic=${encodeURIComponent(topicValue)}`;
+        tallyFrame.dataset.tallySrc =
+            `${base}&topic=${encodeURIComponent(topicValue)}`;
+
         tallyFrame.src = tallyFrame.dataset.tallySrc;
 
-        tallyWrap?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        document.getElementById('tally-form-wrap')
+            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 });
 
