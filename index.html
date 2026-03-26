@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blake Bird + Sean Colbert-Lewis Jr | SGA 2029 Ticket</title>
+    <title>Blake Bird + Sean Colbert-Lewis Jr + Caden White | SGA 2029 Ticket</title>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -547,6 +547,78 @@
             }
         }
 
+
+        /* Caden President section */
+        .president-grid {
+            display: grid;
+            grid-template-columns: 0.94fr 1.06fr;
+            gap: 26px;
+            align-items: stretch;
+            margin-top: 28px;
+        }
+        .president-photo-card {
+            position: relative;
+            min-height: 560px;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background:
+                linear-gradient(180deg, rgba(3,3,5,0.05), rgba(3,3,5,0.45)),
+                url('caden-white-president.jpg') center/cover;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 60px rgba(255,95,170,0.10);
+        }
+        .president-photo-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(3,3,5,0.16) 38%, rgba(3,3,5,0.84) 100%);
+        }
+        .president-achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 22px;
+        }
+        .president-achievement {
+            border-radius: 20px;
+            padding: 18px;
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(16px);
+            transition: 0.3s ease;
+        }
+        .president-achievement:hover {
+            border-color: rgba(255,255,255,0.18);
+            box-shadow: 0 16px 36px rgba(255,95,170,0.08);
+            transform: translateY(-3px);
+        }
+        .president-achievement strong {
+            display: block;
+            color: #fff;
+            font-size: 1rem;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        .president-achievement span {
+            color: var(--text-muted);
+            font-size: 0.96rem;
+            line-height: 1.45;
+        }
+        @media (max-width: 1050px) {
+            .president-grid {
+                grid-template-columns: 1fr;
+            }
+            .president-photo-card {
+                min-height: 460px;
+            }
+        }
+        @media (max-width: 700px) {
+            .president-achievement-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+
         /* =========================================
            FINAL TICKET POLISH & AMBIENT EFFECTS
            ========================================= */
@@ -674,7 +746,7 @@
             filter: blur(26px);
         }
         .tilt-card::after {
-            content: "BLAKE + SEAN";
+            content: "BLAKE + SEAN + CADEN";
             bottom: -16px;
             right: -12px;
             font-size: clamp(2.2rem, 5vw, 3.8rem);
@@ -874,16 +946,21 @@
                             <span>Blake Bird <em>for Treasurer</em></span>
                             <span class="hero-ticket-divider"></span>
                             <span>Sean Colbert-Lewis Jr <em>for VP</em></span>
+                            <span class="hero-ticket-divider"></span>
+                            <span>Caden White <em>for President</em></span>
                         </div>
                         <div class="hero-ticket-links">
                             <a class="contact-pill" href="tel:+18438138108">Blake Direct Line · 843-813-8108</a>
                             <a class="contact-pill" href="tel:+15408404672">Sean Direct Line · +1 (540) 840-4672</a>
+                            <a class="contact-pill" href="tel:+12282388535">Caden Direct Line · 228-238-8535</a>
+                            <a class="contact-pill" href="#president">Meet Caden White</a>
                         </div>
                     </div>
 
                     <div class="mini-chip-row">
                         <div class="mini-chip">Funding</div>
                         <div class="mini-chip">Execution</div>
+                        <div class="mini-chip">Leadership</div>
                         <div class="mini-chip">Real Change</div>
                         <div class="mini-chip">24-Hour Response</div>
                         <div class="mini-chip">Team First</div>
@@ -898,13 +975,19 @@
 
                         <div class="hero-copy-card wide gs-reveal">
                             <p class="lead">
-                              I’m Blake Bird, and I’m running alongside Sean Colbert-Lewis Jr for VP. Every Monday, I leave class early to be at Finance Board helping clubs get approved. I want clubs spending real money and doing amazing things, not getting blindsided or denied because they did not understand the process. I want to reach out before meetings, help them prepare, and be there for them, because this is genuinely my favorite part of the role.
+                              I’m Blake Bird, and I’m running alongside Sean Colbert-Lewis Jr for VP and Caden White for President. Every Monday, I leave class early to be at Finance Board helping clubs get approved. I want clubs spending real money and doing amazing things, not getting blindsided or denied because they did not understand the process. I want to reach out before meetings, help them prepare, and be there for them, because this is genuinely my favorite part of the role.
                             </p>
                         </div>
 
                         <div class="hero-copy-card gs-reveal">
                             <p class="lead">
                               Sean brings the same level of care on the people side: going door to door during events, checking in, resolving conflicts, helping teammates, and making sure people feel included.
+                            </p>
+                        </div>
+
+                        <div class="hero-copy-card gs-reveal">
+                            <p class="lead">
+                              Caden White brings the presidential side of this ticket into focus with real leadership, service, polished presence, and strong event instinct. She understands how representation feels on stage, in clubs, in service spaces, and in the moments that shape class culture.
                             </p>
                         </div>
 
@@ -922,14 +1005,16 @@
 
                         <div class="hero-copy-card gs-reveal">
                             <p class="lead">
-                              If you want a ticket that works hard, communicates fast, brings people together, and actually gets things done, vote Blake Bird for Treasurer and Sean Colbert-Lewis Jr for VP.
+                              If you want a ticket that works hard, communicates fast, brings people together, and actually gets things done, vote Blake Bird for Treasurer, Sean Colbert-Lewis Jr for VP, and Caden White for President.
                             </p>
                         </div>
                     </div>
 
                     <div class="hero-actions">
-                        <button onclick="document.getElementById('guarantee').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
+                        <button onclick="document.getElementById('pulse-top').scrollIntoView({behavior: 'smooth'});" style="max-width: 300px;">Demand a Change</button>
+                        <a href="#pulse-top" class="ghost-btn">Drop Your Idea</a>
                         <a href="#ticket" class="ghost-btn">Meet Sean</a>
+                        <a href="#president" class="ghost-btn">Meet Caden</a>
                         <a href="#pipeline" class="ghost-btn">See the Process</a>
                         <button type="button" class="ghost-btn" onclick="shareSite()" style="max-width: 220px;">Share Site</button>
                     </div>
@@ -943,12 +1028,13 @@
                         <div class="tilt-meta">
                             <div class="tilt-kicker">Treasurer Candidate</div>
                             <h3>Blake Bird</h3>
-                            <p>Running with Sean Colbert-Lewis Jr for VP to build a harder-working, more connected Class of 2029 ticket.</p>
+                            <p>Running with Sean Colbert-Lewis Jr for VP and Caden White for President to build a harder-working, more connected Class of 2029 ticket.</p>
                         </div>
                     </div>
                     <div class="profile-badges">
                         <div class="profile-badge">Finance Board</div>
                         <div class="profile-badge">Sean for VP</div>
+                        <div class="profile-badge">Caden for President</div>
                         <div class="profile-badge">Class of 2029</div>
                         <div class="profile-badge">Team First</div>
                     </div>
@@ -962,6 +1048,75 @@
                             <a class="contact-pill" href="#ticket">See Sean’s Section</a>
                         </div>
                     </div>
+
+                    <div class="partner-panel">
+                        <div class="partner-panel-title">President Candidate</div>
+                        <h4>Caden White for President</h4>
+                        <p>Leadership fellow, Presidential Scholar, service-minded, polished in public-facing spaces, and deeply aligned with the kind of events and class culture people actually remember.</p>
+                        <div class="contact-pills">
+                            <a class="contact-pill" href="tel:+12282388535">Text or Call Caden</a>
+                            <a class="contact-pill" href="#president">See Caden’s Section</a>
+                            <a class="contact-pill" href="#pulse-top">Bring an Event Idea</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="pulse-top">
+            <div class="container">
+                <div class="bento-item pulse-border gs-reveal" style="max-width: 1200px; margin: 0 auto;">
+                    <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 20px;">THE 24-HOUR <span class="gradient-text">PULSE.</span></h2>
+                    <p class="lead">
+                        We want people to connect with us fast, not wonder if their idea got lost. If there is a change you want to see on campus, an event you want pushed forward, or something you want this ticket to know, tell us right here at the top. We will read it, analyze it, and get back to you fast.
+                    </p>
+
+                    <div class="direct-line-panel">
+                        <div class="direct-line-title">Direct Lines</div>
+                        <div class="direct-line-grid">
+                            <a class="contact-pill" href="mailto:bbird1@highpoint.edu">Blake · bbird1@highpoint.edu</a>
+                            <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
+                            <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
+                            <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
+                            <a class="contact-pill" href="tel:+12282388535">Caden · 228-238-8535</a>
+                            <a class="contact-pill" href="#president">Caden · President Section</a>
+                        </div>
+                    </div>
+
+                    <div class="pulse-card" style="max-width: 920px; margin: 0 auto;">
+                        <div class="section-kicker">Your Voice Matters</div>
+                        <div class="chip-wrap">
+                            <button type="button" class="idea-chip">Parking</button>
+                            <button type="button" class="idea-chip">Golf Carts</button>
+                            <button type="button" class="idea-chip">Bigger Events</button>
+                            <button type="button" class="idea-chip">Club Funding</button>
+                            <button type="button" class="idea-chip">Less Red Tape</button>
+                            <button type="button" class="idea-chip">Communication</button>
+                            <button type="button" class="idea-chip">Laundry</button>
+                        </div>
+
+                        <div class="tally-form-wrap" style="border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); backdrop-filter: blur(20px);">
+                            <iframe
+                                id="tally-frame-top"
+                                class="tally-frame"
+                                data-base-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+                                data-tally-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&topic="
+                                loading="lazy"
+                                width="100%"
+                                height="523"
+                                frameborder="0"
+                                marginheight="0"
+                                marginwidth="0"
+                                title="24-Hour Pulse Top">
+                            </iframe>
+                        </div>
+
+                        <div class="share-row">
+                            <button type="button" class="ghost-btn share-btn" onclick="shareSite()">Share This Site</button>
+                            <button type="button" class="ghost-btn share-btn" onclick="copyLink()">Copy Link</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -972,7 +1127,7 @@
                 <div class="bento-item col-12 gs-reveal" style="text-align: center; border-color: var(--hpu-purple);">
                     <h2 class="text-3d" style="font-size: clamp(2.5rem, 5vw, 5rem); margin-bottom: 20px;">NOT A GATEKEEPER.<br><span class="purple-gradient">A PROVIDER.</span></h2>
                     <p class="lead" style="margin: 0 auto;">
-                        Life is not measured in line items. It is measured in the moments we create, how easy we make campus life, and whether people actually get to enjoy the four years they are paying for. I am not here to gatekeep budgets. I am here to turn ideas into experiences, remove unnecessary friction, and help clubs create events, opportunities, and a better day-to-day life on campus. My favorite part of this role is helping clubs understand the process before meetings, walk in prepared, and leave funded instead of blindsided. I will work alongside every presidential candidate to ensure their vision does not stay an idea, but becomes a funded reality. Outside of this, I have already secured a quantitative trading internship, so I am not here for a resume line. This is where I choose to invest my time because I genuinely care about making this campus better.
+                        Life is not measured in line items. It is measured in the moments we create, how easy we make campus life, and whether people actually get to enjoy the four years they are paying for. I am not here to gatekeep budgets. I am here to turn ideas into experiences, remove unnecessary friction, and help clubs create events, opportunities, and a better day-to-day life on campus. My favorite part of this role is helping clubs understand the process before meetings, walk in prepared, and leave funded instead of blindsided. I will work alongside Caden White and every club leader to ensure vision does not stay an idea, but becomes a funded reality. Outside of this, I have already secured a quantitative trading internship, so I am not here for a resume line. This is where I choose to invest my time because I genuinely care about making this campus better.
                     </p>
 
                     <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin: 22px auto 0; max-width: 900px;">
@@ -1172,6 +1327,107 @@
         </section>
 
 
+
+        <section id="president">
+            <div class="container">
+                <div class="gs-reveal">
+                    <div class="section-kicker">President Candidate</div>
+                    <h2 style="font-size: clamp(2.4rem, 5vw, 4.4rem); line-height: 1.06; margin-bottom: 14px;">CADEN WHITE<br><span class="gradient-text">FOR PRESIDENT.</span></h2>
+                    <p class="lead" style="max-width: 980px;">
+                        Caden White brings the presidential side of this ticket into sharp focus. She pairs leadership experience with visible campus presence, service-minded follow-through, and the kind of polish that matters when a class wants events, culture, and representation to feel elevated. She understands how public-facing moments land, how student involvement should feel, and how leadership has to carry both excellence and warmth.
+                    </p>
+                </div>
+
+                <div class="president-grid">
+                    <div class="president-photo-card gs-reveal">
+                        <div class="ticket-photo-label">
+                            <div class="eyebrow">President Candidate</div>
+                            <h3>Caden White</h3>
+                            <p><strong>Ready to lead.</strong> Passion, excellence, experience, and the event instinct to help this class feel connected and proud. <strong>Direct line:</strong> <a href="tel:+12282388535" style="color:#fff; text-decoration:none;">228-238-8535</a></p>
+                        </div>
+                    </div>
+
+                    <div class="bento-item ticket-copy-card gs-reveal">
+                        <h3 style="font-size: 2rem; margin-bottom: 16px;">Why Caden completes this ticket</h3>
+                        <p class="lead" style="font-size: 1.08rem; margin-bottom: 0;">
+                            If Blake brings the funding and structure, and Sean brings the connection and people energy, Caden brings the presidential presence that ties the whole ticket together. Her background shows leadership that is already tested, service that is already real, and visibility in the kinds of moments where details matter. She knows how campus leadership should look, how events should feel, and how to carry herself in ways that make people want to believe in the ticket behind her.
+                        </p>
+
+                        <div class="ticket-points">
+                            <div class="ticket-point gs-reveal">
+                                <h4>Leadership with proof</h4>
+                                <p>Siegfried Leadership Fellow, Presidential Scholar, and active in roles that already demand maturity, follow-through, and strong judgment.</p>
+                            </div>
+                            <div class="ticket-point gs-reveal">
+                                <h4>Event and public-facing instinct</h4>
+                                <p>She understands what high-visibility moments require, from stage presence to presentation, which matters when building memorable class events.</p>
+                            </div>
+                            <div class="ticket-point gs-reveal">
+                                <h4>Service-centered mindset</h4>
+                                <p>Her service and club leadership background shows that she does not just want the title. She wants to contribute, organize, and represent well.</p>
+                            </div>
+                            <div class="ticket-point gs-reveal">
+                                <h4>Class culture energy</h4>
+                                <p>Caden adds warmth, polish, and confidence to the ticket, helping make leadership feel both elevated and approachable.</p>
+                            </div>
+                        </div>
+
+                        <div class="president-achievement-grid">
+                            <div class="president-achievement gs-reveal">
+                                <strong>Siegfried Leadership Fellow</strong>
+                                <span>Built for leadership spaces that prioritize initiative, growth, and presence.</span>
+                            </div>
+                            <div class="president-achievement gs-reveal">
+                                <strong>Freshman Cohort for Siegfried Leadership Fellows</strong>
+                                <span>Already involved in leadership development from the start of her High Point experience.</span>
+                            </div>
+                            <div class="president-achievement gs-reveal">
+                                <strong>Presidential Scholar</strong>
+                                <span>Academic excellence paired with high standards and real responsibility.</span>
+                            </div>
+                            <div class="president-achievement gs-reveal">
+                                <strong>SGA Representative for Athletic Training Club</strong>
+                                <span>Understands representation, communication, and how student voices should move through leadership spaces.</span>
+                            </div>
+                            <div class="president-achievement gs-reveal">
+                                <strong>VP of Service, Circle K International</strong>
+                                <span>Service leadership that reflects planning, follow-through, and care for the broader campus community.</span>
+                            </div>
+                            <div class="president-achievement gs-reveal">
+                                <strong>National Conference on Student Leadership Attendee</strong>
+                                <span>Exposure to broader leadership ideas, standards, and event-centered student engagement.</span>
+                            </div>
+                            <div class="president-achievement gs-reveal">
+                                <strong>North Carolina Athletic Training Association Conference Attendee</strong>
+                                <span>Comfortable in professional, organized environments where details, preparation, and presentation matter.</span>
+                            </div>
+                            <div class="president-achievement gs-reveal">
+                                <strong>2025/26 Varsity Spirit Model · Featured in HBO Max’s <em>Righteous Gemstones</em></strong>
+                                <span>Poised in high-visibility environments, with the confidence and polish to represent the class well in major public-facing moments.</span>
+                            </div>
+                        </div>
+
+                        <div class="ticket-chip-row">
+                            <div class="ticket-chip">President energy</div>
+                            <div class="ticket-chip">Leadership fellow</div>
+                            <div class="ticket-chip">Event instinct</div>
+                            <div class="ticket-chip">Service minded</div>
+                            <div class="ticket-chip">Public-facing polish</div>
+                            <div class="ticket-chip">Class culture</div>
+                        </div>
+
+                        <div class="ticket-contact-row">
+                            <a class="contact-pill" href="tel:+12282388535">Caden Direct Line · 228-238-8535</a>
+                            <a class="contact-pill" href="#hero">Back to Full Ticket</a>
+                            <a class="contact-pill" href="#pulse-top">Bring an Event Idea</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
         <section id="guarantee">
     <div class="container">
         <div class="bento-item pulse-border gs-reveal" style="max-width: 1200px; margin: 0 auto;">
@@ -1187,6 +1443,8 @@
                     <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
                     <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
                     <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
+                    <a class="contact-pill" href="tel:+12282388535">Caden · 228-238-8535</a>
+                    <a class="contact-pill" href="#president">Caden · President Section</a>
                 </div>
             </div>
 
@@ -1203,9 +1461,10 @@
                         <button type="button" class="idea-chip">Laundry</button>
                     </div>
 
-                    <div id="tally-form-wrap" style="border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); backdrop-filter: blur(20px);">
+                    <div id="tally-form-wrap" class="tally-form-wrap" style="border-radius: 24px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); background: rgba(255,255,255,0.02); backdrop-filter: blur(20px);">
                         <iframe
                             id="tally-frame"
+                            class="tally-frame"
                             data-base-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
                             data-tally-src="https://tally.so/embed/gDL5gJ?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1&topic="
                             loading="lazy"
@@ -1255,11 +1514,13 @@
     <footer>
         <div class="container footer-inner footer-stack">
             <div>Built for the Class of 2029.</div>
-            <div class="footer-ticket">Blake Bird for Treasurer · Sean Colbert-Lewis Jr for VP</div>
+            <div class="footer-ticket">Blake Bird for Treasurer · Sean Colbert-Lewis Jr for VP · Caden White for President</div>
             <div class="footer-direct-lines">
                 <a class="contact-pill" href="tel:+18438138108">Blake · 843-813-8108</a>
                 <a class="contact-pill" href="tel:+15408404672">Sean · +1 (540) 840-4672</a>
                 <a class="contact-pill" href="mailto:scolber1@highpoint.edu">Sean · scolber1@highpoint.edu</a>
+                <a class="contact-pill" href="tel:+12282388535">Caden · 228-238-8535</a>
+                <a class="contact-pill" href="#president">Caden · President Section</a>
             </div>
         </div>
     </footer>
@@ -1305,30 +1566,27 @@ if("undefined"!=typeof Tally){
   d.body.appendChild(s);
 }
 
-const tallyFrame = document.getElementById('tally-frame');
-
 document.querySelectorAll('.idea-chip').forEach(chip => {
     chip.addEventListener('click', () => {
+        const pulseCard = chip.closest('.pulse-card');
+        const tallyFrame = pulseCard?.querySelector('.tally-frame');
+        const tallyWrap = pulseCard?.querySelector('.tally-form-wrap');
         if (!tallyFrame) return;
 
         const label = chip.textContent.trim();
         const base = tallyFrame.dataset.baseSrc;
-
         const topicValue = `I want to see a change in ${label.toLowerCase()}.`;
 
-        tallyFrame.dataset.tallySrc =
-            `${base}&topic=${encodeURIComponent(topicValue)}`;
-
+        tallyFrame.dataset.tallySrc = `${base}&topic=${encodeURIComponent(topicValue)}`;
         tallyFrame.src = tallyFrame.dataset.tallySrc;
 
-        document.getElementById('tally-form-wrap')
-            ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        tallyWrap?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 });
 
     
         // 1. ADVANCED TYPEWRITER EFFECT
-        const words = ["Team First.", "Treasurer + VP Ticket.", "Memory Makers.", "Class of '29 Ready."];
+        const words = ["Team First.", "President + VP + Treasurer.", "Memory Makers.", "Class of '29 Ready."];
         let i = 0, j = 0, isDeleting = false;
         function typeWriter() {
             const el = document.getElementById("type-text");
@@ -1502,8 +1760,8 @@ document.querySelectorAll('.idea-chip').forEach(chip => {
 
         async function shareSite() {
             const data = {
-                title: 'Blake Bird + Sean Colbert-Lewis Jr | SGA 2029 Ticket',
-                text: "Check out Blake Bird for Treasurer and Sean Colbert-Lewis Jr for VP.",
+                title: 'Blake Bird + Sean Colbert-Lewis Jr + Caden White | SGA 2029 Ticket',
+                text: "Check out Blake Bird for Treasurer, Sean Colbert-Lewis Jr for VP, and Caden White for President.",
                 url: window.location.href
             };
             if (navigator.share) {
